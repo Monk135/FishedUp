@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bppwo62mc8d22"]
+
+[ext_resource type="PackedScene" uid="uid://bl6spa5qvonta" path="res://scenes/terrain/rock01.tscn" id="1_a141m"]
+[ext_resource type="PackedScene" uid="uid://6nkpr16jb8iv" path="res://scenes/characters/fish.tscn" id="2_lbgp1"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_a141m")]
+position = Vector2(-7, 256)
+rotation = -0.15283634
+
+[node name="Node2D" parent="Node2D" instance=ExtResource("1_a141m")]
+position = Vector2(340.20245, 136.3829)
+rotation = -0.15283634
+
+[node name="Node2D" parent="Node2D/Node2D" instance=ExtResource("1_a141m")]
+position = Vector2(-660.3109, -389.77872)
+rotation = 1.3655435
+
+[node name="Node2D" parent="Node2D/Node2D/Node2D" instance=ExtResource("1_a141m")]
+position = Vector2(543.3783, -1075.667)
+rotation = 5.070918
+
+[node name="Fish" parent="." instance=ExtResource("2_lbgp1")]
+top_level = true
+rotation = -0.012332801

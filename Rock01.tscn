@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu2yhesnvj30n"]
+
+[ext_resource type="Texture2D" uid="uid://cpxa3ucjgkaka" path="res://assets/terrain/rock01.png" id="1_2tpep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18020"]
+size = Vector2(543, 230.65239)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(7, -2.999998)
+rotation = 0.18031158
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_18020")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_2tpep")

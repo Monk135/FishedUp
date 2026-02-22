@@ -1,76 +1,38 @@
 extends RigidBody2D
 
-@export var flip_force: float = 500.0
-@export var push_force: float = 300.0
-@export var max_velocity: float = 1000.0
+@export var max_launch_force: float = 2000.0
+@export var max_drag_distance: float = 200.0
 
-@onready var ground_ray: RayCast2D = $RayCast2D
-@onready var sprite: Sprite2D = $Sprite2D
+var is_dragging: bool = false
+var drag_start: Vector2 = Vector2.ZERO
 
-var flip_tween: Tween
-var can_flip: bool = true
-var flip_cooldown: float = 0.2
-var flip_timer: float = 0.0
-var original_scale: Vector2
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			if global_position.distance_to(get_global_mouse_position()) < 60:
+				is_dragging = true
+				drag_start = get_global_mouse_position()
+		else:
+			if is_dragging:
+				launch()
+				is_dragging = false
+				queue_redraw()  # force clear the line
 
-func _ready():
-	# Set up the RayCast2D for ground detection
-	ground_ray.target_position = Vector2(0, 50)  # Adjust length as needed
-	ground_ray.enabled = true
-	
-	original_scale = sprite.scale
-	
-	# Connect to input events
-	contact_monitor = true
-	max_contacts_reported = 10
+func launch():
+	var drag_vector = drag_start - get_global_mouse_position()
+	drag_vector = drag_vector.limit_length(max_drag_distance)
+	var force = drag_vector * (max_launch_force / max_drag_distance)
+	linear_velocity = Vector2.ZERO  # reset velocity before each launch
+	angular_velocity = 0.0
+	apply_central_impulse(force)
+	apply_torque_impulse(randf_range(-50000, 50000))  # random spin on launch
 
-func _physics_process(delta):
-	flip_timer -= delta
-	if flip_timer <= 0:
-		can_flip = true
-	
-	# Handle input
-	handle_input()
-	
-	# Limit velocity to prevent crazy speeds
-	if linear_velocity.length() > max_velocity:
-		linear_velocity = linear_velocity.normalized() * max_velocity
+func _draw():
+	if is_dragging:
+		var drag_vector = drag_start - get_global_mouse_position()
+		drag_vector = drag_vector.limit_length(max_drag_distance)
+		draw_line(Vector2.ZERO, to_local(drag_start - drag_vector) - to_local(global_position), Color.RED, 2)
 
-func handle_input():
-	if Input.is_action_just_pressed("flip") and can_flip:
-		perform_flip()
-
-func perform_flip():
-	can_flip = false
-	flip_timer = flip_cooldown
-	
-	# Get mouse position for directional flipping
-	var mouse_pos = get_global_mouse_position()
-	var direction = (mouse_pos - global_position).normalized()
-	
-	# Apply force in the direction of mouse
-	apply_central_impulse(direction * flip_force)
-	
-	# Add some spin for effect
-	apply_torque_impulse(randf_range(-100, 100))
-	
-	# Visual feedback
-	animate_flip()
-
-func animate_flip():
-	if flip_tween:
-		flip_tween.kill()
-	# Simple scale animation for flip feedback
-	sprite.scale = original_scale # Reset before animating
-	flip_tween = create_tween()
-	flip_tween.tween_property(sprite, "scale", original_scale * Vector2(1.2, 0.8), 0.1)
-	flip_tween.tween_property(sprite, "scale", original_scale * Vector2.ONE, 0.1)
-
-func is_touching_ground() -> bool:
-	return ground_ray.is_colliding()
-
-# Optional: Add surface pushing mechanics
-func _on_body_entered(body):
-	if body.is_in_group("pushable"):
-		var push_direction = (body.global_position - global_position).normalized()
-		body.apply_central_impulse(push_direction * push_force)
+func _physics_process(_delta):
+	if is_dragging:
+		queue_redraw()

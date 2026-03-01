@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b184xgi2m7edi"]
 
-[ext_resource type="Script" uid="uid://bei6o8170iu4o" path="res://fish_player.gd" id="1_0akro"]
+[ext_resource type="Script" uid="uid://bei6o8170iu4o" path="res://scripts/fish_player.gd" id="1_0akro"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_07rn3"]
 radius = 13.999999

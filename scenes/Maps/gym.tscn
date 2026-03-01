@@ -14,6 +14,7 @@ player_id = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(578, 326)
+zoom = Vector2(0.2, 0.2)
 
 [node name="Node2D" parent="." instance=ExtResource("2_x2dp0")]
 position = Vector2(37.00003, 625)

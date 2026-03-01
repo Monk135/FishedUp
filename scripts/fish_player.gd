@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 @export var player_id: int = 1
 
-@export var turn_speed: float = 240.0
-@export var thrust_force: float = 1200.0
-@export var max_speed: float = 1200.0
+@export var turn_speed: float = 10.0
+@export var thrust_force: float = 2200.0
+@export var passive_thrust: float = 600
+@export var max_speed: float = 2400.0
 @export var damping: float = 0.98
 @export var segment_distance: float = 1
 @export var segment_lag: float = 0.5
@@ -13,6 +14,13 @@ extends CharacterBody2D
 @onready var head_area: Area2D = $HeadArea
 @onready var body_area: Area2D = $BodyArea
 @onready var tail_area: Area2D = $TailArea
+
+@export var angular_damping: float = 0.99
+@export var max_rotation_speed: float = 1.0  # degrees per second
+
+var angular_velocity: float = 0.0
+
+
 
 @onready var physics_shape: CollisionShape2D = $PhysicsShape
 
@@ -24,6 +32,10 @@ var segment_angles: Array[float] = []
 @onready var head_visual: Polygon2D = $HeadVisual
 @onready var body_visual: Polygon2D = $BodyVisual
 @onready var tail_visual: Polygon2D = $TailVisual
+
+var idle_wave_timer: float = 0.0
+var idle_wave_direction: float = 1.0
+
 
 
 func _ready() -> void:
@@ -83,11 +95,20 @@ func _get_input() -> Vector2:
 
 func _handle_movement(input: Vector2, delta: float) -> void:
 	if abs(input.x) > 0.1:
-		head_angle += deg_to_rad(turn_speed * input.x * delta)
+		angular_velocity += deg_to_rad(turn_speed * input.x * delta)
 
-	if abs(input.y) > 0.1:
-		var forward := Vector2(cos(head_angle), sin(head_angle))
-		velocity += forward * (-input.y) * thrust_force * delta
+	# Always thrust forward, input.y only adds extra speed (no reverse)
+	var forward := Vector2(cos(head_angle), sin(head_angle))
+	var thrust := passive_thrust
+	if input.y < -0.1:
+		thrust += thrust_force * abs(input.y)  # extra boost when pressing forward
+	#if abs(input.x) > 0.1:
+		#thrust += thrust_force * abs(input.y)  # extra boost when pressing forward
+	velocity += forward * thrust * delta
+
+	angular_velocity *= angular_damping
+	angular_velocity = clamp(angular_velocity, deg_to_rad(-max_rotation_speed), deg_to_rad(max_rotation_speed))
+	head_angle += angular_velocity
 
 	velocity = velocity.limit_length(max_speed)
 	velocity *= damping
@@ -95,6 +116,8 @@ func _handle_movement(input: Vector2, delta: float) -> void:
 	var collision := move_and_collide(velocity * delta)
 	if collision:
 		velocity = velocity.bounce(collision.get_normal()) * 0.5
+
+
 
 func _update_chain() -> void:
 	segment_positions[1] = global_position

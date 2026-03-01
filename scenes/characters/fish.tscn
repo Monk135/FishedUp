@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://b184xgi2m7edi"]
+
+[ext_resource type="Script" uid="uid://bei6o8170iu4o" path="res://fish_player.gd" id="1_0akro"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_07rn3"]
+radius = 13.999999
+height = 27.999998
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0akro"]
+size = Vector2(77, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rotv5"]
+size = Vector2(27, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rihds"]
+size = Vector2(47, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_juify"]
+size = Vector2(54, 20)
+
+[node name="Fish" type="CharacterBody2D"]
+script = ExtResource("1_0akro")
+
+[node name="PhysicsShape" type="CollisionShape2D" parent="."]
+position = Vector2(-15.000006, 0)
+scale = Vector2(4.919999, 1)
+shape = SubResource("CapsuleShape2D_07rn3")
+
+[node name="BillVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(19, 17, 29, 9, 41, 4, 57, 1, 104, 0, 57, -1, 41, -5, 29, -11, 19, -17)
+
+[node name="HeadVisual" type="Polygon2D" parent="."]
+position = Vector2(-1, 3)
+polygon = PackedVector2Array(-19.144556, 13.672983, 20, 14, 20, -20, 0.13476563, -20, -19, -20)
+
+[node name="BodyVisual" type="Polygon2D" parent="."]
+position = Vector2(0, 1)
+polygon = PackedVector2Array(-21, -17, -77, -17, -77, 15, -21, 15)
+
+[node name="TailVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-77, -16, -126, -4, -135, -13, -135, 13, -127, 4, -78, 16)
+
+[node name="BillArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BillArea"]
+position = Vector2(60.5, 0)
+shape = SubResource("RectangleShape2D_0akro")
+
+[node name="HeadArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadArea"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_rotv5")
+
+[node name="BodyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
+position = Vector2(-48.5, 0)
+shape = SubResource("RectangleShape2D_rihds")
+
+[node name="TailArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TailArea"]
+position = Vector2(-108, 0)
+shape = SubResource("RectangleShape2D_juify")

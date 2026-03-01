@@ -1,54 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bppwo62mc8d22"]
+[gd_scene load_steps=2 format=3 uid="uid://bppwo62mc8d22"]
 
-[ext_resource type="PackedScene" uid="uid://bl6spa5qvonta" path="res://scenes/terrain/rock01.tscn" id="1_a141m"]
-[ext_resource type="Texture2D" uid="uid://bf3nkepgbe50e" path="res://assets/terrain/Beach_Background-885.jpg" id="1_lbgp1"]
-[ext_resource type="PackedScene" uid="uid://mc3x017mwt6k" path="res://scenes/characters/FishCharacter.tscn" id="2_a141m"]
+[ext_resource type="Script" uid="uid://csdw4moxstkwr" path="res://scripts/ClaudeFiles/game_manager.gd" id="1_3dnxu"]
 
-[node name="Node2D" type="Node2D"]
-position = Vector2(4, 4)
-
-[node name="BeachBackground885" type="Sprite2D" parent="."]
-position = Vector2(263, -153)
-scale = Vector2(1.5578821, 1.5578821)
-texture = ExtResource("1_lbgp1")
-
-[node name="Node2D" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(-252, 88.000015)
-rotation = 0.77288467
-
-[node name="Node2D2" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(-258, -335.00003)
-rotation = 2.7919655
-
-[node name="Node2D3" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(327.99994, -584.00006)
-rotation = -3.1379912
-scale = Vector2(1.3803825, 2.039609)
-
-[node name="Node2D4" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(1066.0001, -656.00006)
-rotation = -1.1603783
-scale = Vector2(1.3803825, 2.0396092)
-
-[node name="Node2D5" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(453, 207)
-rotation = -0.19701701
-
-[node name="Node2D6" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(920.99994, 154)
-rotation = 0.100583255
-
-[node name="Node2D7" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(1295, -140)
-rotation = -2.3959262
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="Node2D8" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(1388.0001, 607)
-rotation = -0.068279564
-
-[node name="Node2D9" parent="." instance=ExtResource("1_a141m")]
-position = Vector2(90, 189)
-
-[node name="Fish" parent="." instance=ExtResource("2_a141m")]
-position = Vector2(0, -1)
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_3dnxu")

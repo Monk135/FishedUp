@@ -20,30 +20,25 @@ size = Vector2(54, 20)
 
 [node name="Fish" type="CharacterBody2D"]
 script = ExtResource("1_0akro")
+thrust_force = 1000.0
+passive_thrust = 1800.0
+max_speed = 2800.0
 
 [node name="PhysicsShape" type="CollisionShape2D" parent="."]
 position = Vector2(-15.000006, 0)
 scale = Vector2(4.919999, 1)
 shape = SubResource("CapsuleShape2D_07rn3")
 
-[node name="BillVisual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(19, 17, 29, 9, 41, 4, 57, 1, 104, 0, 57, -1, 41, -5, 29, -11, 19, -17)
-
-[node name="HeadVisual" type="Polygon2D" parent="."]
-position = Vector2(-1, 3)
-polygon = PackedVector2Array(-19.144556, 13.672983, 20, 14, 20, -20, 0.13476563, -20, -19, -20)
-
-[node name="BodyVisual" type="Polygon2D" parent="."]
-position = Vector2(0, 1)
-polygon = PackedVector2Array(-21, -17, -77, -17, -77, 15, -21, 15)
-
-[node name="TailVisual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-77, -16, -126, -4, -135, -13, -135, 13, -127, 4, -78, 16)
-
 [node name="BillArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BillArea"]
 position = Vector2(60.5, 0)
+scale = Vector2(1, 2.9200008)
+shape = SubResource("RectangleShape2D_0akro")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BillArea"]
+position = Vector2(26, 0)
+scale = Vector2(0.18633734, 8.613843)
 shape = SubResource("RectangleShape2D_0akro")
 
 [node name="HeadArea" type="Area2D" parent="."]
@@ -63,3 +58,23 @@ shape = SubResource("RectangleShape2D_rihds")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TailArea"]
 position = Vector2(-108, 0)
 shape = SubResource("RectangleShape2D_juify")
+
+[node name="BillVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(19, 17, 29, 9, 41, 4, 57, 1, 104, 0, 57, -1, 41, -5, 29, -11, 19, -17)
+
+[node name="HeadVisual" type="Polygon2D" parent="."]
+position = Vector2(-1, 3)
+polygon = PackedVector2Array(-19.144556, 13.672983, 20, 14, 20, -20, 0.13476563, -20, -19, -20)
+
+[node name="BodyVisual" type="Polygon2D" parent="."]
+position = Vector2(0, 1)
+polygon = PackedVector2Array(-21, -17, -77, -17, -77, 15, -21, 15)
+
+[node name="TailVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-77, -16, -126, -4, -135, -13, -135, 13, -127, 4, -78, 16)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -1.0
+offset_top = -66.0
+offset_right = 3.0
+offset_bottom = -39.0

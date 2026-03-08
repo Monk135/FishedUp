@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://be572qpl0opva"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_18puo"]
+
+[node name="CollTriangleWall" type="Node2D"]
+scale = Vector2(10, 10)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(7.5, -5.48, 10, -0.025, 0, 0, 2.5, -5.475, 5, -6.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.245, -2.725)
+scale = Vector2(3.95, 5.985)
+skew = 0.42760566
+texture = SubResource("PlaceholderTexture2D_18puo")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(3.9196737, -5.5655217)
+rotation = -0.39138934
+scale = Vector2(2.732767, 0.8758197)
+texture = SubResource("PlaceholderTexture2D_18puo")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(5.994075, -5.3222904)
+rotation = 0.38823316
+scale = Vector2(2.732767, 1.410954)
+texture = SubResource("PlaceholderTexture2D_18puo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(6.7675133, -2.7505605)
+rotation = 3.1415927
+scale = Vector2(3.95, 5.985)
+skew = -0.42760566
+texture = SubResource("PlaceholderTexture2D_18puo")
+flip_h = true
+flip_v = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(4.9216566, -1.8899931)
+rotation = 3.1415927
+scale = Vector2(3.95, 3.725)
+texture = SubResource("PlaceholderTexture2D_18puo")
+flip_h = true
+flip_v = true

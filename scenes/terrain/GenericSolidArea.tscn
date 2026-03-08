@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd70pbrhek67"]
+
+[ext_resource type="Script" uid="uid://baj8pv4u1xfo6" path="res://scripts/solid_area.gd" id="1_nknc8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nknc8"]
+
+[node name="GenericSolidArea" type="Node2D"]
+script = ExtResource("1_nknc8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_nknc8")
+debug_color = Color(0.5784072, 0.5469227, 0.2355625, 0.41960785)

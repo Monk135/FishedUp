@@ -80,7 +80,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_07rn3")
 
 [node name="WallFeeler" type="RayCast2D" parent="."]
-target_position = Vector2(150, 0)
+target_position = Vector2(75, 0)
 
 [node name="WallFeelerLeft" type="RayCast2D" parent="."]
 target_position = Vector2(150, 0)

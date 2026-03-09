@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcs2je8eil71h"]
+
+[ext_resource type="Script" uid="uid://i5pxqd5ddn3a" path="res://scenes/Menus_&_UI/character_select.gd" id="1_4k1bq"]
+
+[node name="MenuCharacterSelection" type="Node2D"]
+script = ExtResource("1_4k1bq")
+
+[node name="PreviewPoint0" type="Marker2D" parent="."]
+position = Vector2(230, 150)
+
+[node name="PreviewPoint1" type="Marker2D" parent="."]
+position = Vector2(460, 150)
+
+[node name="PreviewPoint2" type="Marker2D" parent="."]
+position = Vector2(690, 150)
+
+[node name="PreviewPoint3" type="Marker2D" parent="."]
+position = Vector2(920, 150)
+
+[node name="JoinLabel" type="Label" parent="."]
+offset_left = 483.0
+offset_top = 500.0
+offset_right = 679.0
+offset_bottom = 523.0
+text = "Press A / Spacebar to join"

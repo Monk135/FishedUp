@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://x7pnoqujujxs"]
+[gd_scene load_steps=4 format=3 uid="uid://x7pnoqujujxs"]
 
-[ext_resource type="PackedScene" uid="uid://b184xgi2m7edi" path="res://scenes/characters/fish.tscn" id="1_mosdk"]
 [ext_resource type="Script" uid="uid://d227566xm7cxg" path="res://scenes/Maps/Gym/gym.gd" id="1_x2dp0"]
 [ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="3_axptr"]
 
@@ -15,22 +14,18 @@ position = Vector2(602, 358)
 scale = Vector2(1834.222, 1298.5928)
 texture = SubResource("PlaceholderTexture2D_x2dp0")
 
-[node name="Fish" parent="." instance=ExtResource("1_mosdk")]
-modulate = Color(0.1861873, 0.6587565, 0, 1)
-position = Vector2(55, 319)
-floor_stop_on_slope = false
-floor_block_on_wall = false
-joypad_id = 1
-passive_thrust = 400.0
-
-[node name="Fish2" parent="." instance=ExtResource("1_mosdk")]
-modulate = Color(0.76783806, 0.7648956, 0, 1)
-position = Vector2(1151, 331)
-player_id = 2
-joypad_id = 0
-initial_angle_degrees = 180.0
-passive_thrust = 400.0
-
 [node name="CamDynamic" parent="." instance=ExtResource("3_axptr")]
 position = Vector2(577, 327)
 max_zoom = 1.0
+
+[node name="SpawnPoint0" type="Marker2D" parent="."]
+position = Vector2(155, 147)
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(946, 146)
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(158, 501)
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(951, 514)

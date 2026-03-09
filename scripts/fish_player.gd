@@ -7,6 +7,8 @@ var original_modulate: Color = Color.WHITE
 
 var segment_prev_positions: Array[Vector2] = []
 
+@export var is_preview: bool = false
+
 var hit_flash_timer: float = 0.0
 @export var hit_flash_duration: float = 0.2
 var player_color: Color = Color.WHITE
@@ -147,6 +149,8 @@ func take_hit(impact_speed: float, _knockback_dir: Vector2) -> void:
 		die()
 
 func _physics_process(delta: float) -> void:
+	if is_preview:
+		return
 	var input := _get_input()
 	_last_input = input
 	#global_position += velocity * delta
@@ -197,19 +201,19 @@ func _handle_wall_anticipation(_delta: float) -> void:
 	var right_hit := wall_feeler_right.is_colliding()
 	
 	# All rays hit = stuck in corner, pick a random escape direction
-	if center_hit and left_hit and right_hit:
-		if corner_escape_direction == 0.0:
-			corner_escape_direction = [-1.0, 1.0].pick_random()
-		angular_velocity += corner_escape_direction * 0.02
-		return
+	#if center_hit and left_hit and right_hit:
+		#if corner_escape_direction == 0.0:
+			#corner_escape_direction = [-1.0, 1.0].pick_random()
+		#angular_velocity += corner_escape_direction * 0.02
+		#return
 	
 	var total_push: float = 0.0
 	
-	if center_hit:
-		var normal := wall_feeler.get_collision_normal()
-		var tangent := Vector2(-normal.y, normal.x)
-		if tangent.dot(Vector2(cos(head_angle), sin(head_angle))) < 0:
-			tangent = -tangent
+	#if center_hit:
+		#var normal := wall_feeler.get_collision_normal()
+		#var tangent := Vector2(-normal.y, normal.x)
+		#if tangent.dot(Vector2(cos(head_angle), sin(head_angle))) < 0:
+			#tangent = -tangent
 		#total_push += angle_difference(head_angle, tangent.angle()) * 0.1
 
 	if left_hit:

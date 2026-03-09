@@ -1,6 +1,11 @@
+@tool
 extends Camera2D
 
-@export var map_size: Vector2 = Vector2(1920, 1080)
+@export var map_size: Vector2 = Vector2(1920, 1080):
+	set(value):
+		map_size = value
+		queue_redraw()
+
 @export var min_zoom: float = 0.3
 @export var max_zoom: float = 2.0
 @export var zoom_margin: float = 200.0
@@ -9,13 +14,24 @@ extends Camera2D
 var map_start: Vector2
 var map_end: Vector2
 
+func _draw() -> void:
+	var half := map_size / 2.0
+	draw_rect(Rect2(-half, map_size), Color(0.2, 0.8, 1.0, 0.3), false, 3.0)
+
 func _ready() -> void:
 	anchor_mode = AnchorMode.ANCHOR_MODE_DRAG_CENTER
-	# Use camera's initial position as the map center
-	map_start = global_position - map_size / 2.0
-	map_end = global_position + map_size / 2.0
+	if not Engine.is_editor_hint():
+		map_start = global_position - map_size / 2.0
+		map_end = global_position + map_size / 2.0
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		queue_redraw()
 
 func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+
 	var fish := get_tree().get_nodes_in_group("fish")
 	if fish.is_empty():
 		return

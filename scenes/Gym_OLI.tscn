@@ -1,43 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://bppwo62mc8d22"]
+[gd_scene load_steps=6 format=3 uid="uid://bppwo62mc8d22"]
 
+[ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="1_6npea"]
 [ext_resource type="PackedScene" uid="uid://b184xgi2m7edi" path="res://scenes/characters/fish.tscn" id="1_ppeyx"]
-[ext_resource type="PackedScene" uid="uid://bi7dwcxnsqshx" path="res://scenes/terrain/Coll_Cylindre.tscn" id="3_6npea"]
-[ext_resource type="PackedScene" uid="uid://be572qpl0opva" path="res://scenes/terrain/Coll_TriangleWall.tscn" id="3_pp5hy"]
+[ext_resource type="PackedScene" uid="uid://b7f4g2qrc7ye" path="res://scenes/terrain/Coll_Pillar.tscn" id="4_6npea"]
+[ext_resource type="PackedScene" uid="uid://bcapokgb5nn5p" path="res://scenes/terrain/GenericWall.tscn" id="5_enyfi"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6npea"]
 
 [node name="Arena" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="CamDynamic" parent="." instance=ExtResource("1_6npea")]
+position = Vector2(575, 325)
+max_zoom = 1.0
 
 [node name="Fish2" parent="." instance=ExtResource("1_ppeyx")]
 modulate = Color(0.76783806, 0.7648956, 0, 1)
-position = Vector2(157.00002, 321)
+position = Vector2(139.697, 227.83)
 scale = Vector2(0.9908796, 1.0182652)
 player_id = 2
 joypad_id = 0
 initial_angle_degrees = 180.0
 passive_thrust = 400.0
 
+[node name="Fish3" parent="." instance=ExtResource("1_ppeyx")]
+modulate = Color(0.76783806, 0.7648956, 0, 1)
+position = Vector2(1039.5671, 190.14308)
+scale = Vector2(0.9908796, 1.0182652)
+joypad_id = 1
+passive_thrust = 400.0
+
 [node name="RootMap" type="Node2D" parent="."]
 position = Vector2(154, 84)
 scale = Vector2(3, 3)
 
-[node name="CollTriangleWall" parent="." instance=ExtResource("3_pp5hy")]
-position = Vector2(200, 651)
-scale = Vector2(20, 20)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(575, 325)
+scale = Vector2(1920, 1080)
+texture = SubResource("PlaceholderTexture2D_6npea")
 
-[node name="CollTriangleWall2" parent="." instance=ExtResource("3_pp5hy")]
-position = Vector2(407.00003, 4.9999995)
-rotation = 3.1415927
-scale = Vector2(20, 20)
+[node name="GenericWall" parent="." instance=ExtResource("5_enyfi")]
+position = Vector2(-432.07245, 414.65164)
+scale = Vector2(1, 19.723104)
 
-[node name="CollCylindre" parent="." instance=ExtResource("3_6npea")]
-position = Vector2(564, 337)
+[node name="GenericWall2" parent="." instance=ExtResource("5_enyfi")]
+position = Vector2(1580.0084, 412.33554)
+scale = Vector2(1, 19.723104)
 
-[node name="CollCylindre2" parent="." instance=ExtResource("3_6npea")]
-position = Vector2(866, 133.99998)
-rotation = 1.5730549
+[node name="GenericWall3" parent="." instance=ExtResource("5_enyfi")]
+position = Vector2(628.11224, -260.47772)
+rotation = -1.5707964
+scale = Vector2(1, 27.003103)
 
-[node name="CollCylindre3" parent="." instance=ExtResource("3_6npea")]
-position = Vector2(873.00006, 479)
-rotation = 1.5730549
+[node name="GenericWall4" parent="." instance=ExtResource("5_enyfi")]
+position = Vector2(610.04, 910.7625)
+rotation = -1.5707964
+scale = Vector2(1, 27.003103)
+
+[node name="CollPillar2" parent="." instance=ExtResource("4_6npea")]
+position = Vector2(211.58005, 320.04303)
+scale = Vector2(5, 5)
+
+[node name="CollPillar3" parent="." instance=ExtResource("4_6npea")]
+position = Vector2(945.1184, 321.37396)
+scale = Vector2(5, 5)

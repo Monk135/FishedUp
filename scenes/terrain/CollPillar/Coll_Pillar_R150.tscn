@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7f4g2qrc7ye"]
+[gd_scene load_steps=2 format=3 uid="uid://x2kit23i2csb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7up4l"]
+radius = 150.0
 
 [node name="CollPillar" type="Node2D"]
-scale = Vector2(3, 3)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

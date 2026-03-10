@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnaoe6r4hu30x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uh788"]
+blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7up4l"]
+radius = 200.0
+
+[node name="CollPillar" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+material = SubResource("CanvasItemMaterial_uh788")
+shape = SubResource("CircleShape2D_7up4l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 0.16666664)
+scale = Vector2(0.03245536, 1.6666667)

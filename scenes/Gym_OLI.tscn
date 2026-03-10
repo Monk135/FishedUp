@@ -1,67 +1,56 @@
-[gd_scene load_steps=6 format=3 uid="uid://bppwo62mc8d22"]
+[gd_scene load_steps=5 format=3 uid="uid://bppwo62mc8d22"]
 
 [ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="1_6npea"]
-[ext_resource type="PackedScene" uid="uid://b184xgi2m7edi" path="res://scenes/characters/fish.tscn" id="1_ppeyx"]
-[ext_resource type="PackedScene" uid="uid://b7f4g2qrc7ye" path="res://scenes/terrain/Coll_Pillar.tscn" id="4_6npea"]
-[ext_resource type="PackedScene" uid="uid://bcapokgb5nn5p" path="res://scenes/terrain/GenericWall.tscn" id="5_enyfi"]
+[ext_resource type="Script" uid="uid://bvr4cokslk1dr" path="res://scenes/gym_oli.gd" id="1_mu714"]
+[ext_resource type="PackedScene" uid="uid://bcapokgb5nn5p" path="res://scenes/terrain/CollSquare/CollSquare_100.tscn" id="5_enyfi"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6npea"]
 
 [node name="Arena" type="Node2D"]
+script = ExtResource("1_mu714")
 
 [node name="CamDynamic" parent="." instance=ExtResource("1_6npea")]
 position = Vector2(575, 325)
+map_size = Vector2(3840, 2160)
 max_zoom = 1.0
-
-[node name="Fish2" parent="." instance=ExtResource("1_ppeyx")]
-modulate = Color(0.76783806, 0.7648956, 0, 1)
-position = Vector2(139.697, 227.83)
-scale = Vector2(0.9908796, 1.0182652)
-player_id = 2
-joypad_id = 0
-initial_angle_degrees = 180.0
-passive_thrust = 400.0
-
-[node name="Fish3" parent="." instance=ExtResource("1_ppeyx")]
-modulate = Color(0.76783806, 0.7648956, 0, 1)
-position = Vector2(1039.5671, 190.14308)
-scale = Vector2(0.9908796, 1.0182652)
-joypad_id = 1
-passive_thrust = 400.0
 
 [node name="RootMap" type="Node2D" parent="."]
 position = Vector2(154, 84)
 scale = Vector2(3, 3)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="GenericWall" parent="RootMap" instance=ExtResource("5_enyfi")]
+position = Vector2(-512.6159, 84.070366)
+scale = Vector2(0.33333334, 9.374369)
+
+[node name="GenericWall2" parent="RootMap" instance=ExtResource("5_enyfi")]
+position = Vector2(792.3389, 75.086945)
+scale = Vector2(0.33333334, 9.214369)
+
+[node name="GenericWall3" parent="RootMap" instance=ExtResource("5_enyfi")]
+position = Vector2(174.88571, -291.73242)
+rotation = -1.5707964
+scale = Vector2(0.33333334, 17.05437)
+
+[node name="GenericWall4" parent="RootMap" instance=ExtResource("5_enyfi")]
+position = Vector2(163.74435, 445.22607)
+rotation = -1.5707964
+scale = Vector2(0.33333334, 18.001036)
+
+[node name="Bg" type="Sprite2D" parent="RootMap"]
 visible = false
 z_index = -1
-position = Vector2(575, 325)
-scale = Vector2(1920, 1080)
+position = Vector2(140.33334, 80.333336)
+scale = Vector2(1280, 720)
 texture = SubResource("PlaceholderTexture2D_6npea")
 
-[node name="GenericWall" parent="." instance=ExtResource("5_enyfi")]
-position = Vector2(-432.07245, 414.65164)
-scale = Vector2(1, 19.723104)
+[node name="SpawnPoint0" type="Marker2D" parent="."]
+position = Vector2(-1039.6936, -479.58752)
 
-[node name="GenericWall2" parent="." instance=ExtResource("5_enyfi")]
-position = Vector2(1580.0084, 412.33554)
-scale = Vector2(1, 19.723104)
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(2111.453, -451.34674)
 
-[node name="GenericWall3" parent="." instance=ExtResource("5_enyfi")]
-position = Vector2(628.11224, -260.47772)
-rotation = -1.5707964
-scale = Vector2(1, 27.003103)
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(-978.2121, 1085.815)
 
-[node name="GenericWall4" parent="." instance=ExtResource("5_enyfi")]
-position = Vector2(610.04, 910.7625)
-rotation = -1.5707964
-scale = Vector2(1, 27.003103)
-
-[node name="CollPillar2" parent="." instance=ExtResource("4_6npea")]
-position = Vector2(211.58005, 320.04303)
-scale = Vector2(5, 5)
-
-[node name="CollPillar3" parent="." instance=ExtResource("4_6npea")]
-position = Vector2(945.1184, 321.37396)
-scale = Vector2(5, 5)
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(2149.8706, 1098.8147)

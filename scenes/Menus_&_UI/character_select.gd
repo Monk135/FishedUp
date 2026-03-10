@@ -126,7 +126,7 @@ func _check_all_ready() -> void:
 				"device_id": device_id,
 				"color": COLORS[device_color_index[device_id]]
 			})
-		get_tree().change_scene_to_file("res://scenes/Maps/Gym/gym.tscn")
+		get_tree().change_scene_to_file("res://scenes/Gym_OLI.tscn")
 
 func _try_leave(device_id: int) -> void:
 	if not joined_devices.has(device_id):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://x7pnoqujujxs"]
+[gd_scene load_steps=5 format=3 uid="uid://x7pnoqujujxs"]
 
 [ext_resource type="Script" uid="uid://d227566xm7cxg" path="res://scenes/Maps/Gym/gym.gd" id="1_x2dp0"]
+[ext_resource type="Script" uid="uid://b2khj3yg14xed" path="res://scripts/LevelTech/LevelOutlines/RoundLevelOutline.gd" id="3_2wc0v"]
 [ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="3_axptr"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x2dp0"]
@@ -29,3 +30,9 @@ position = Vector2(158, 501)
 
 [node name="SpawnPoint3" type="Marker2D" parent="."]
 position = Vector2(951, 514)
+
+[node name="Outline" type="StaticBody2D" parent="."]
+position = Vector2(578, 327)
+script = ExtResource("3_2wc0v")
+radius = 650.0
+segments = 64

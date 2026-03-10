@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bppwo62mc8d22"]
+[gd_scene load_steps=7 format=3 uid="uid://bppwo62mc8d22"]
 
 [ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="1_6npea"]
 [ext_resource type="Script" uid="uid://bvr4cokslk1dr" path="res://scenes/gym_oli.gd" id="1_mu714"]
-[ext_resource type="PackedScene" uid="uid://bcapokgb5nn5p" path="res://scenes/terrain/CollSquare/CollSquare_100.tscn" id="5_enyfi"]
+[ext_resource type="Script" uid="uid://b2khj3yg14xed" path="res://scripts/LevelTech/LevelOutlines/RoundLevelOutline.gd" id="3_pp5hy"]
+[ext_resource type="PackedScene" uid="uid://ccari5c1j71h3" path="res://scenes/terrain/CollPillar/Coll_Pillar_R50.tscn" id="5_rwvwd"]
+[ext_resource type="PackedScene" uid="uid://b3385s201jcpj" path="res://scenes/terrain/CollPillar/Coll_Pillar_R100.tscn" id="6_mu714"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6npea"]
 
@@ -10,31 +12,12 @@
 script = ExtResource("1_mu714")
 
 [node name="CamDynamic" parent="." instance=ExtResource("1_6npea")]
-position = Vector2(575, 325)
 map_size = Vector2(3840, 2160)
 max_zoom = 1.0
 
 [node name="RootMap" type="Node2D" parent="."]
 position = Vector2(154, 84)
 scale = Vector2(3, 3)
-
-[node name="GenericWall" parent="RootMap" instance=ExtResource("5_enyfi")]
-position = Vector2(-512.6159, 84.070366)
-scale = Vector2(0.33333334, 9.374369)
-
-[node name="GenericWall2" parent="RootMap" instance=ExtResource("5_enyfi")]
-position = Vector2(792.3389, 75.086945)
-scale = Vector2(0.33333334, 9.214369)
-
-[node name="GenericWall3" parent="RootMap" instance=ExtResource("5_enyfi")]
-position = Vector2(174.88571, -291.73242)
-rotation = -1.5707964
-scale = Vector2(0.33333334, 17.05437)
-
-[node name="GenericWall4" parent="RootMap" instance=ExtResource("5_enyfi")]
-position = Vector2(163.74435, 445.22607)
-rotation = -1.5707964
-scale = Vector2(0.33333334, 18.001036)
 
 [node name="Bg" type="Sprite2D" parent="RootMap"]
 visible = false
@@ -44,13 +27,42 @@ scale = Vector2(1280, 720)
 texture = SubResource("PlaceholderTexture2D_6npea")
 
 [node name="SpawnPoint0" type="Marker2D" parent="."]
-position = Vector2(-1039.6936, -479.58752)
+position = Vector2(-576.60333, -324.52277)
 
 [node name="SpawnPoint1" type="Marker2D" parent="."]
-position = Vector2(2111.453, -451.34674)
+position = Vector2(576.8036, -325.769)
 
 [node name="SpawnPoint2" type="Marker2D" parent="."]
-position = Vector2(-978.2121, 1085.815)
+position = Vector2(-578.9696, 327.7845)
 
 [node name="SpawnPoint3" type="Marker2D" parent="."]
-position = Vector2(2149.8706, 1098.8147)
+position = Vector2(578.3894, 326.36115)
+
+[node name="Outline" type="StaticBody2D" parent="."]
+script = ExtResource("3_pp5hy")
+radius = 1000.0
+segments = 64
+
+[node name="CollPillar2" parent="." instance=ExtResource("5_rwvwd")]
+position = Vector2(-228.8352, 29.562164)
+
+[node name="CollPillar3" parent="." instance=ExtResource("6_mu714")]
+position = Vector2(338.01453, -210.68436)
+
+[node name="CollPillar4" parent="." instance=ExtResource("5_rwvwd")]
+position = Vector2(-72.70068, -543.9027)
+
+[node name="CollPillar" parent="." instance=ExtResource("5_rwvwd")]
+position = Vector2(43.945313, 624.7372)
+
+[node name="CollPillar5" parent="." instance=ExtResource("5_rwvwd")]
+position = Vector2(316.28833, 253.83191)
+
+[node name="CollPillar6" parent="." instance=ExtResource("5_rwvwd")]
+position = Vector2(-513.7095, -288.26038)
+
+[node name="CollPillar7" parent="." instance=ExtResource("6_mu714")]
+position = Vector2(-485.17828, 471.70642)
+
+[node name="CollPillar8" parent="." instance=ExtResource("5_rwvwd")]
+position = Vector2(331.8512, -625.44714)

@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bi7dwcxnsqshx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sg84u"]
-radius = 35.0
-height = 280.0
+radius = 16.0
+height = 202.0
 
 [node name="CollCylindre" type="Node2D"]
 

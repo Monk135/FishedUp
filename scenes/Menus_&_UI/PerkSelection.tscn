@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://5gu3x1etma6g"]
+
+[ext_resource type="Script" uid="uid://b8ikpfoamtvhx" path="res://scenes/Menus_&_UI/perk_selection.gd" id="1_oed67"]
+
+[node name="PerkSelection" type="Node2D"]
+script = ExtResource("1_oed67")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 445.0
+offset_top = 287.0
+offset_right = 670.0
+offset_bottom = 310.0
+text = "Perk Selection - Coming Soon"
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Card0" type="PanelContainer" parent="."]
+offset_left = 273.0
+offset_top = 207.0
+offset_right = 313.0
+offset_bottom = 247.0
+
+[node name="Perk" type="Label" parent="Card0"]
+layout_mode = 2
+text = "Perk"
+
+[node name="Card1" type="PanelContainer" parent="."]
+offset_left = 575.0
+offset_top = 208.0
+offset_right = 615.0
+offset_bottom = 248.0
+
+[node name="Perk" type="Label" parent="Card1"]
+layout_mode = 2
+text = "Perk"
+
+[node name="Card2" type="PanelContainer" parent="."]
+offset_left = 852.0
+offset_top = 207.0
+offset_right = 892.0
+offset_bottom = 247.0
+
+[node name="Perk" type="Label" parent="Card2"]
+layout_mode = 2
+text = "Perk"

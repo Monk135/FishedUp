@@ -5,9 +5,14 @@ extends CharacterBody2D
 
 var original_modulate: Color = Color.WHITE
 
+var last_hit_by: int = -99  # device_id of last attacker
+
 var segment_prev_positions: Array[Vector2] = []
 
 @export var is_preview: bool = false
+
+@onready var repulsion_area: Area2D = $RepulsionArea
+@export var repulsion_force: float = 300.0
 
 var hit_flash_timer: float = 0.0
 @export var hit_flash_duration: float = 0.2
@@ -44,9 +49,8 @@ var _last_input: Vector2 = Vector2.ZERO
 @export var max_rotation_speed: float = 1.0  # degrees per second
 
 @export var max_health: float = 100.0
-@export var invulnerability_duration: float = 1.0
-@export var min_damage: float = 10.0
-@export var max_damage: float = 60.0
+@export var invulnerability_duration: float = 0.5
+@export var initial_damage: float = 20.0
 @export var knockback_force: float = 600.0
 
 var health: float = 100.0
@@ -115,8 +119,9 @@ func _on_bill_area_entered(area: Area2D) -> void:
 			return
 		var impact_speed := velocity.length()
 		var knockback_dir: Vector2 = (other_fish.global_position - global_position).normalized()
+		
 		other_fish.velocity += knockback_dir * knockback_force
-		other_fish.take_hit(impact_speed, knockback_dir)
+		other_fish.take_hit(impact_speed, knockback_dir, joypad_id)
 		velocity -= knockback_dir * knockback_force * 0.8
 
 	elif area.is_in_group("bill"):
@@ -128,17 +133,19 @@ func _on_bill_area_entered(area: Area2D) -> void:
 		other_fish.velocity += -push_dir * knockback_force
 
 func die() -> void:
+	if last_hit_by != -99:
+		GameState.add_kill(last_hit_by)
+		print("kill awarded to device: ", last_hit_by, " scores: ", GameState.scores)
 	get_parent().on_fish_died()
 	queue_free()
 
-func take_hit(impact_speed: float, _knockback_dir: Vector2) -> void:
+func take_hit(impact_speed: float, _knockback_dir: Vector2, attacker_id: int) -> void:
 	if invulnerable_timer > 0.0:
 		return
+	last_hit_by = attacker_id
 
 	var t: float = clamp(impact_speed / max_speed, 0.0, 1.0)
-	var damage: float = 20
-	#var damage: float = lerp(min_damage, max_damage, t)
-
+	var damage: float = initial_damage
 	health -= damage
 	invulnerable_timer = invulnerability_duration
 	health_bar.value = health
@@ -186,8 +193,9 @@ func _physics_process(delta: float) -> void:
 		if _outline_flash_timer <= 0.0:
 			_reset_color()
 
-
 func _handle_wall_anticipation(_delta: float) -> void:
+	if _last_input.length() < 0.15:
+		return
 	for feeler in [wall_feeler, wall_feeler_left, wall_feeler_right]:
 		feeler.global_position = segment_positions[0]
 		feeler.force_raycast_update()
@@ -195,6 +203,7 @@ func _handle_wall_anticipation(_delta: float) -> void:
 	wall_feeler.global_rotation = head_angle
 	wall_feeler_left.global_rotation = head_angle - deg_to_rad(45)
 	wall_feeler_right.global_rotation = head_angle + deg_to_rad(45)
+
 	
 	var center_hit := wall_feeler.is_colliding()
 	var left_hit := wall_feeler_left.is_colliding()
@@ -349,6 +358,7 @@ func _update_visuals() -> void:
 	head_visual.global_position = segment_positions[1]
 	body_visual.global_position = segment_positions[2]
 	tail_visual.global_position = segment_positions[3]
+
 
 	bill_visual.rotation = segment_angles[0]
 	head_visual.rotation = segment_angles[1]

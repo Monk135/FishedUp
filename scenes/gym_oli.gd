@@ -9,11 +9,27 @@ func _ready() -> void:
 func on_fish_died() -> void:
 	fish_count -= 1
 	if fish_count <= 1:
-		await get_tree().create_timer(3.0).timeout
+		await get_tree().create_timer(2.0).timeout
+		_end_combat()
+
+func _end_combat() -> void:
+	GameState.combat_count += 1
+	
+	if GameState.has_winner():
+		# game over screen later
+		return
+	
+	if GameState.combat_count >= GameState.COMBATS_PER_SEQUENCE:
+		GameState.combat_count = 0
+		get_tree().change_scene_to_file("res://scenes/Menus_&_UI/PerkSelection.tscn")
+	else:
 		get_tree().reload_current_scene()
 
 func _spawn_players() -> void:
+	var devices: Array = []
 	for p in PlayerData.players:
+		devices.append(p["device_id"])
+		GameState.initialize_players(devices)
 		var slot: int = p["slot"]
 		var device_id: int = p["device_id"]
 		var color: Color = p["color"]

@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 PlayerData="*res://scripts/PlayerData/player_data.gd"
 GameState="*res://scripts/PlayerData/game_state.gd"
+WwiseRuntimeManager="*res://addons/Wwise/runtime/wwise_runtime_manager.gd"
+AudioManager="*res://Wwise/AudioManager/audio_manager.gd"
 
 [display]
 
@@ -147,3 +149,8 @@ common/physics_ticks_per_second=240
 2d/default_gravity=0.0
 2d/solver/solver_iterations=32
 2d/physics_ticks_per_second=240
+
+[wwise]
+
+common_user_settings/root_output_path="res://Wwise/Soundbanks"
+project_settings/windows_platform_info="res://Wwise/resources/Windows.tres"

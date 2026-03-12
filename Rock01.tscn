@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu2yhesnvj30n"]
+[gd_scene load_steps=5 format=3 uid="uid://bu2yhesnvj30n"]
 
 [ext_resource type="Texture2D" uid="uid://cpxa3ucjgkaka" path="res://assets/terrain/rock01.png" id="1_2tpep"]
+[ext_resource type="WwiseBank" uid="uid://dw67e3vlddqql" path="res://Wwise/resources/SoundBank/{D09F80FF-9175-4BCF-988F-2AB9F3929458}.tres" id="2_nedds"]
+[ext_resource type="WwiseEvent" uid="uid://cq6mixd1vktuh" path="res://Wwise/resources/Event/{C4939B80-CD73-400A-AE62-D0230B251D17}.tres" id="3_ack5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18020"]
 size = Vector2(543, 230.65239)
@@ -17,3 +19,14 @@ shape = SubResource("RectangleShape2D_18020")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 texture = ExtResource("1_2tpep")
+
+[node name="AkBank" type="AkBank" parent="."]
+bank = ExtResource("2_nedds")
+load_on = 1
+
+[node name="AkListener2D" type="AkListener2D" parent="."]
+
+[node name="AkEvent2D" type="AkEvent2D" parent="AkListener2D"]
+event = ExtResource("3_ack5e")
+trigger_on = 2
+stop_on = 3

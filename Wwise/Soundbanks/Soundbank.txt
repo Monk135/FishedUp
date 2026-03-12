@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3725903807	Music_Start			\Default Work Unit\Music_Start	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	1054239652	Music_Start	.cache\2A\{2A4CB5C1-00EB-B1E0-44E7-D4C486CA13CF}.wem		\Containers\Default Work Unit\Music_Start		37620884
+

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcs2je8eil71h"]
+[gd_scene load_steps=4 format=3 uid="uid://dcs2je8eil71h"]
 
 [ext_resource type="Script" uid="uid://i5pxqd5ddn3a" path="res://scenes/Menus_&_UI/character_select.gd" id="1_4k1bq"]
+[ext_resource type="WwiseBank" uid="uid://dw67e3vlddqql" path="res://Wwise/resources/SoundBank/{D09F80FF-9175-4BCF-988F-2AB9F3929458}.tres" id="2_l8efd"]
+[ext_resource type="WwiseEvent" uid="uid://cq6mixd1vktuh" path="res://Wwise/resources/Event/{C4939B80-CD73-400A-AE62-D0230B251D17}.tres" id="3_35mxh"]
 
 [node name="MenuCharacterSelection" type="Node2D"]
 script = ExtResource("1_4k1bq")
@@ -23,3 +25,15 @@ offset_top = 500.0
 offset_right = 679.0
 offset_bottom = 523.0
 text = "Press A / Spacebar to join"
+
+[node name="AkBank" type="AkBank" parent="."]
+bank = ExtResource("2_l8efd")
+load_on = 1
+
+[node name="AkListener2D" type="AkListener2D" parent="."]
+
+[node name="AkEvent2D" type="AkEvent2D" parent="."]
+event = ExtResource("3_35mxh")
+trigger_on = 1
+stop_on = 3
+stop_fade_time = 1

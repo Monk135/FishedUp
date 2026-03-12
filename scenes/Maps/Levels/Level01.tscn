@@ -1,8 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnl185jyuqy6k"]
+[gd_scene load_steps=5 format=3 uid="uid://cnl185jyuqy6k"]
 
 [ext_resource type="PackedScene" uid="uid://bcapokgb5nn5p" path="res://scenes/terrain/CollSquare/CollSquare_100.tscn" id="1_kqh0g"]
+[ext_resource type="WwiseBank" uid="uid://dw67e3vlddqql" path="res://Wwise/resources/SoundBank/{D09F80FF-9175-4BCF-988F-2AB9F3929458}.tres" id="2_8nffw"]
+[ext_resource type="WwiseEvent" uid="uid://cq6mixd1vktuh" path="res://Wwise/resources/Event/{C4939B80-CD73-400A-AE62-D0230B251D17}.tres" id="3_ibbv6"]
+[ext_resource type="Script" uid="uid://b7sp2rnxe408y" path="res://scenes/Maps/Levels/music.gd" id="4_ibbv6"]
 
 [node name="Level01" type="Node2D"]
 
 [node name="GenericWall" parent="." instance=ExtResource("1_kqh0g")]
 position = Vector2(425, 199)
+
+[node name="AkBank" type="AkBank" parent="."]
+bank = ExtResource("2_8nffw")
+load_on = 1
+unload_on = 3
+
+[node name="AkListener2D" type="AkListener2D" parent="."]
+
+[node name="AkEvent2D" type="AkEvent2D" parent="."]
+event = ExtResource("3_ibbv6")
+trigger_on = 1
+stop_on = 3
+stop_fade_time = 1
+
+[node name="Music" type="Node2D" parent="."]
+script = ExtResource("4_ibbv6")

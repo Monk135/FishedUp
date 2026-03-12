@@ -1,0 +1,8 @@
+[gd_resource type="WwiseEvent" format=3 uid="uid://cq6mixd1vktuh"]
+
+[resource]
+is_in_user_defined_sound_bank = true
+name = "Music_Start"
+id = 3725903807
+guid = "{C4939B80-CD73-400A-AE62-D0230B251D17}"
+dummy = true

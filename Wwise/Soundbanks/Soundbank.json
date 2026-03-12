@@ -1,0 +1,47 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "172",
+  "SoundBanks": [
+   {
+    "Id": "1661994096",
+    "Type": "User",
+    "GUID": "{D09F80FF-9175-4BCF-988F-2AB9F3929458}",
+    "Language": "SFX",
+    "Hash": "{F902493D-11DF-8C1C-CCF0-F0A4C0CD74D4}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Soundbank",
+    "ShortName": "Soundbank",
+    "Path": "Soundbank.bnk",
+    "Media": [
+     {
+      "Id": "1054239652",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Le Castle Vania - LED Spirals [Extended Full Length Version] from the movie John Wick (Official) - Le Castle Vania (128k).wav",
+      "CachePath": "2A/{2A4CB5C1-00EB-B1E0-44E7-D4C486CA13CF}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3725903807",
+      "Name": "Music_Start",
+      "ObjectPath": "\\Events\\Default Work Unit\\Music_Start",
+      "GUID": "{C4939B80-CD73-400A-AE62-D0230B251D17}",
+      "DurationType": "OneShot",
+      "DurationMin": "195.9416",
+      "DurationMax": "195.9416",
+      "MediaRefs": [
+       {
+        "Id": "1054239652"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{D26668B1-269D-C4BE-491A-7308D25A0E5E}"
+ }
+}

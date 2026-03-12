@@ -26,6 +26,8 @@ func _highlight_card(index: int) -> void:
 		cards[i].scale = scale
 
 func _input(event: InputEvent) -> void:
+	if selection_order.is_empty() or current_player_index >= selection_order.size():
+		return
 	var current_device: int = selection_order[current_player_index]
 	
 	if event is InputEventKey and event.pressed and not event.echo:

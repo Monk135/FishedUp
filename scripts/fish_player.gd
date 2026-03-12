@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var player_id: int = 1
 @export var joypad_id: int = -1  # -1 = keyboard, 0+ = joypad
 
+var _prev_space_pressed: bool = false
+
 var original_modulate: Color = Color.WHITE
 
 var last_hit_by: int = -99  # device_id of last attacker
@@ -247,17 +249,28 @@ func _get_input() -> Vector2:
 			Input.get_joy_axis(joypad_id, JOY_AXIS_LEFT_X),
 			Input.get_joy_axis(joypad_id, JOY_AXIS_LEFT_Y)
 		)
-	match player_id:
-		1:
+	match joypad_id:
+		-1:  # WASD
 			return Vector2(
 				Input.get_axis("move_left_p1", "move_right_p1"),
 				Input.get_axis("move_up_p1", "move_down_p1")
 			)
-		_:
+		-2:  # IJKL
 			return Vector2(
 				Input.get_axis("move_left_p2", "move_right_p2"),
 				Input.get_axis("move_up_p2", "move_down_p2")
 			)
+		-3:  # Arrow keys
+			return Vector2(
+				Input.get_axis("move_left_p3", "move_right_p3"),
+				Input.get_axis("move_up_p3", "move_down_p3")
+			)
+		-4:  # TFGH
+			return Vector2(
+				Input.get_axis("move_left_p4", "move_right_p4"),
+				Input.get_axis("move_up_p4", "move_down_p4")
+			)
+	return Vector2.ZERO
 
 func _flash_red() -> void:
 	modulate = Color.RED
@@ -303,6 +316,25 @@ func _handle_movement(input: Vector2, delta: float) -> void:
 	if joypad_id >= 0:
 		_handle_joypad_movement(input, delta)
 		return
+	
+	var space_pressed: bool = false
+	match joypad_id:
+		-1: space_pressed = Input.is_key_pressed(KEY_SPACE)
+		-2: space_pressed = Input.is_key_pressed(KEY_ENTER)
+		-3: space_pressed = Input.is_key_pressed(KEY_SHIFT)
+		-4: space_pressed = Input.is_key_pressed(KEY_B)
+
+	var space_just_pressed: bool = space_pressed and not _prev_space_pressed
+	_prev_space_pressed = space_pressed
+
+	if space_just_pressed and dash_cooldown_timer <= 0.0 and not is_dashing:
+		is_dashing = true
+		dash_timer = dash_duration
+		dash_cooldown_timer = dash_cooldown
+		var forward := Vector2(cos(head_angle), sin(head_angle))
+		velocity += forward * dash_force
+	
+	
 	
 	# ... rest of your existing keyboard handling unchanged
 	if abs(input.x) > 0.1:

@@ -19,19 +19,27 @@ var ready_indicators: Dictionary = {}
 
 
 
+# Keyboard device IDs
+# -1 = WASD player
+# -2 = Arrow keys player
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_SPACE:
-			if joined_devices.has(-1):
-				_try_ready(-1)
-			else:
-				_try_join(-1)
-		if event.keycode == KEY_ESCAPE:
-			_try_leave(-1)
-		if event.keycode == KEY_A and joined_devices.has(-1):
-			_cycle_color(-1, -1)
-		if event.keycode == KEY_D and joined_devices.has(-1):
-			_cycle_color(-1, 1)
+		match event.keycode:
+			KEY_SPACE: _handle_keyboard_join(-1)
+			KEY_ENTER: _handle_keyboard_join(-2)
+			KEY_SHIFT: _handle_keyboard_join(-3)
+			KEY_B: _handle_keyboard_join(-4)
+			KEY_ESCAPE: _try_leave(-1)
+			KEY_BACKSPACE: _try_leave(-2)
+			KEY_DELETE: _try_leave(-3)
+			KEY_V: _try_leave(-4)
+			KEY_A:
+				if joined_devices.has(-1):
+					_cycle_color(-1, -1)
+			KEY_D:
+				if joined_devices.has(-1):
+					_cycle_color(-1, 1)
 	
 	if event is InputEventJoypadButton and event.pressed:
 		if event.button_index == JOY_BUTTON_A:
@@ -59,6 +67,11 @@ func _cycle_color(device_id: int, direction: int) -> void:
 			child.color = COLORS[idx]
 	print("device ", device_id, " color: ", idx)
 
+func _handle_keyboard_join(device_id: int) -> void:
+	if joined_devices.has(device_id):
+		_try_ready(device_id)
+	else:
+		_try_join(device_id)
 
 var fish_previews: Dictionary = {}
 

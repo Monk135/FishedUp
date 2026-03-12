@@ -23,7 +23,6 @@ collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0akro")
 passive_thrust = 1800.0
-initial_damage = 100.0
 
 [node name="BillArea" type="Area2D" parent="."]
 

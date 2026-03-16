@@ -21,6 +21,7 @@ PlayerData="*res://scripts/PlayerData/player_data.gd"
 GameState="*res://scripts/PlayerData/game_state.gd"
 WwiseRuntimeManager="*res://addons/Wwise/runtime/wwise_runtime_manager.gd"
 AudioManager="*res://Wwise/AudioManager/audio_manager.gd"
+PerkRegistry="*res://scripts/Perks/perk_registry.gd"
 
 [display]
 

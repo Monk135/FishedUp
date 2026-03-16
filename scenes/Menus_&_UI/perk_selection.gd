@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var score_label: Label = $ScoreLabel
 
+var current_perks: Array = []
 var current_player_index: int = 0  # which player is currently picking
 var hovered_card: int = 1          # start on middle card
 var selection_order: Array = []    # device_ids in pick order
@@ -19,6 +20,23 @@ func _ready() -> void:
 	selection_order = GameState.get_sorted_scores()
 	print("selection order: ", selection_order)
 	_highlight_card(hovered_card)
+	_deal_cards()
+
+func _deal_cards() -> void:
+	var perk_paths := PerkRegistry.get_random_perks(3)
+	current_perks.clear()
+	
+	for i in 3:
+		# Remove old card if present
+		if cards[i].get_child_count() > 0:
+			cards[i].get_child(0).queue_free()
+		
+		# Instance new perk card
+		var perk_scene: PackedScene = load(perk_paths[i])
+		var perk_instance = perk_scene.instantiate()
+		perk_instance.set_meta("perk_path", perk_paths[i])
+		cards[i].add_child(perk_instance)
+		current_perks.append(perk_instance)
 
 func _highlight_card(index: int) -> void:
 	for i in cards.size():
@@ -56,9 +74,15 @@ func _input(event: InputEvent) -> void:
 
 func _select_card(device_id: int) -> void:
 	selected_cards[device_id] = hovered_card
+	var chosen_perk = current_perks[hovered_card]
+	print("scene_file_path: ", chosen_perk.scene_file_path)
+	PlayerData.pending_perks[device_id] = chosen_perk.perk_name
+	print("player ", device_id, " selected: ", chosen_perk.perk_name)
 	current_player_index += 1
-	hovered_card = 1  # reset to middle card
+	hovered_card = 1
+	PlayerData.pending_perks[device_id] = chosen_perk.get_meta("perk_path")
 	_highlight_card(hovered_card)
+	_deal_cards()  # new cards for next player
 	
 	if current_player_index >= selection_order.size():
 		_continue()

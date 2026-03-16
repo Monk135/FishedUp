@@ -29,7 +29,6 @@ func _spawn_players() -> void:
 	var devices: Array = []
 	for p in PlayerData.players:
 		devices.append(p["device_id"])
-		GameState.initialize_players(devices)
 		var slot: int = p["slot"]
 		var device_id: int = p["device_id"]
 		var color: Color = p["color"]
@@ -42,3 +41,14 @@ func _spawn_players() -> void:
 				child.color = color
 		add_child(fish)
 		fish_count += 1
+		
+		if PlayerData.pending_perks.has(device_id):
+			var perk_path: String = PlayerData.pending_perks[device_id]
+			print("applying perk from path: ", perk_path)
+			var perk_scene: PackedScene = load(perk_path)
+			var perk: Node = perk_scene.instantiate()
+			perk.apply(fish)
+			perk.queue_free()
+		
+		
+		GameState.initialize_players(devices)

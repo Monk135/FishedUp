@@ -11,10 +11,9 @@ var last_hit_by: int = -99  # device_id of last attacker
 
 var segment_prev_positions: Array[Vector2] = []
 
-@export var is_preview: bool = false
+@export var damage_bonus: float = 0.0
 
-@onready var repulsion_area: Area2D = $RepulsionArea
-@export var repulsion_force: float = 300.0
+@export var is_preview: bool = false
 
 var hit_flash_timer: float = 0.0
 @export var hit_flash_duration: float = 0.2
@@ -55,7 +54,7 @@ var _last_input: Vector2 = Vector2.ZERO
 @export var initial_damage: float = 20.0
 @export var knockback_force: float = 600.0
 
-var health: float = 100.0
+@export var health: float = 100.0
 var invulnerable_timer: float = 0.0
 
 var _prev_a_pressed: bool = false
@@ -123,7 +122,7 @@ func _on_bill_area_entered(area: Area2D) -> void:
 		var knockback_dir: Vector2 = (other_fish.global_position - global_position).normalized()
 		
 		other_fish.velocity += knockback_dir * knockback_force
-		other_fish.take_hit(impact_speed, knockback_dir, joypad_id)
+		other_fish.take_hit(impact_speed, knockback_dir, joypad_id, damage_bonus)
 		velocity -= knockback_dir * knockback_force * 0.8
 
 	elif area.is_in_group("bill"):
@@ -141,13 +140,10 @@ func die() -> void:
 	get_parent().on_fish_died()
 	queue_free()
 
-func take_hit(impact_speed: float, _knockback_dir: Vector2, attacker_id: int) -> void:
+func take_hit(impact_speed: float, _knockback_dir: Vector2, attacker_id: int, attacker_damage_bonus: float = 0.0) -> void:
 	if invulnerable_timer > 0.0:
 		return
-	last_hit_by = attacker_id
-
-	var t: float = clamp(impact_speed / max_speed, 0.0, 1.0)
-	var damage: float = initial_damage
+	var damage: float = initial_damage + attacker_damage_bonus
 	health -= damage
 	invulnerable_timer = invulnerability_duration
 	health_bar.value = health
@@ -156,6 +152,10 @@ func take_hit(impact_speed: float, _knockback_dir: Vector2, attacker_id: int) ->
 
 	if health <= 0.0:
 		die()
+
+func refresh_health_bar() -> void:
+	health_bar.max_value = max_health
+	health_bar.value = health
 
 func _physics_process(delta: float) -> void:
 	if is_preview:

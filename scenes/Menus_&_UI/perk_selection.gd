@@ -73,6 +73,9 @@ func _input(event: InputEvent) -> void:
 				_select_card(current_device)
 
 func _select_card(device_id: int) -> void:
+	print("selecting card for device: ", device_id, " card index: ", hovered_card)
+	print("selection order: ", selection_order)
+	print("current player index: ", current_player_index)
 	selected_cards[device_id] = hovered_card
 	var chosen_perk = current_perks[hovered_card]
 	print("scene_file_path: ", chosen_perk.scene_file_path)

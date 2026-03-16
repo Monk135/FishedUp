@@ -31,6 +31,9 @@ func _spawn_players() -> void:
 		devices.append(p["device_id"])
 		var slot: int = p["slot"]
 		var device_id: int = p["device_id"]
+		print("spawning fish for device: ", device_id)
+		if PlayerData.pending_perks.has(device_id):
+			print("applying perk: ", PlayerData.pending_perks[device_id])
 		var color: Color = p["color"]
 		var spawn: Marker2D = get_node("SpawnPoint%d" % slot)
 		var fish: CharacterBody2D = load("res://scenes/characters/fish.tscn").instantiate()
@@ -49,6 +52,8 @@ func _spawn_players() -> void:
 			var perk: Node = perk_scene.instantiate()
 			perk.apply(fish)
 			perk.queue_free()
+			
+		print("pending perks: ", PlayerData.pending_perks)
 		
 		
 		GameState.initialize_players(devices)

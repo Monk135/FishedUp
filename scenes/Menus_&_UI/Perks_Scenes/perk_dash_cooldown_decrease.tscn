@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://7in2w3yh23io"]
+
+[ext_resource type="PackedScene" uid="uid://lhduebmhcfbn" path="res://scenes/Menus_&_UI/Perks_Scenes/perk_card.tscn" id="1_i432y"]
+[ext_resource type="Script" uid="uid://s028nstx10l4" path="res://scripts/Perks/perk_dash_cooldown_decrease.gd" id="2_i432y"]
+
+[node name="PerkCard" instance=ExtResource("1_i432y")]
+script = ExtResource("2_i432y")

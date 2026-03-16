@@ -1,9 +1,11 @@
 extends Node
 
 const AVAILABLE_PERKS: Array = [
-	"res://scenes/Menus_&_UI/perk_speed_increase.tscn",
-	"res://scenes/Menus_&_UI/perk_damage_increase.tscn",
-	"res://scenes/Menus_&_UI/perk_health_increase.tscn",
+	"res://scenes/Menus_&_UI/Perks_Scenes/perk_speed_increase.tscn",
+	"res://scenes/Menus_&_UI/Perks_Scenes/perk_damage_increase.tscn",
+	"res://scenes/Menus_&_UI/Perks_Scenes/perk_health_increase.tscn",
+	"res://scenes/Menus_&_UI/Perks_Scenes/perk_turn_speed_increase.tscn",
+	"res://scenes/Menus_&_UI/Perks_Scenes/perk_dash_cooldown_decrease.tscn",
 	# add more perk scenes here as you make them
 ]
 

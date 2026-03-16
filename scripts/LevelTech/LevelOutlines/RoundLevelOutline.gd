@@ -36,28 +36,35 @@ func _draw() -> void:
 func _build_collision() -> void:
 	if Engine.is_editor_hint():
 		return
-	# Remove old segments
 	for child in get_children():
-		if child is StaticBody2D:
+		if child is StaticBody2D or child is Area2D:
 			child.queue_free()
 	
 	for i in segments:
 		var angle_a := -i * TAU / segments
 		var angle_b := -(i + 1) * TAU / segments
-		var point_a := Vector2(cos(angle_a), sin(angle_a)) * radius
-		var point_b := Vector2(cos(angle_b), sin(angle_b)) * radius
-		
+		var mid_angle := (angle_a + angle_b) / 2.0
+
 		var body := StaticBody2D.new()
 		body.add_to_group("wall")
 		var col := CollisionShape2D.new()
 		var shape := WorldBoundaryShape2D.new()
-		# Normal points inward
-		var mid_angle := (angle_a + angle_b) / 2.0
 		shape.normal = -Vector2(cos(mid_angle), sin(mid_angle))
 		shape.distance = -radius
 		col.shape = shape
 		body.add_child(col)
 		add_child(body)
+
+		# Area2D for bill detection
+		var area := Area2D.new()
+		area.add_to_group("wall")
+		var area_col := CollisionShape2D.new()
+		var area_shape := WorldBoundaryShape2D.new()
+		area_shape.normal = -Vector2(cos(mid_angle), sin(mid_angle))
+		area_shape.distance = -radius
+		area_col.shape = area_shape
+		area.add_child(area_col)
+		add_child(area)
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():

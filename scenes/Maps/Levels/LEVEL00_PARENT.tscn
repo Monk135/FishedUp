@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqbi2tbwy3y6x"]
+
+[ext_resource type="Script" uid="uid://cc7xaioe1sjvy" path="res://scripts/LevelTech/LEVEL00_PARENT.gd" id="1_tvktl"]
+[ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="2_uv6f4"]
+[ext_resource type="Script" uid="uid://b2khj3yg14xed" path="res://scripts/LevelTech/LevelOutlines/RoundLevelOutline.gd" id="3_mx7ip"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6npea"]
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_tvktl")
+
+[node name="CamDynamic" parent="." instance=ExtResource("2_uv6f4")]
+map_size = Vector2(3840, 2160)
+max_zoom = 1.0
+
+[node name="RootMap" type="Node2D" parent="."]
+position = Vector2(154, 84)
+scale = Vector2(3, 3)
+
+[node name="Bg" type="Sprite2D" parent="RootMap"]
+visible = false
+z_index = -1
+position = Vector2(140.33334, 80.333336)
+scale = Vector2(1280, 720)
+texture = SubResource("PlaceholderTexture2D_6npea")
+
+[node name="SpawnPoint0" type="Marker2D" parent="."]
+position = Vector2(-576.60333, -324.52277)
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(576.8036, -325.769)
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(-578.9696, 327.7845)
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(578.3894, 326.36115)
+
+[node name="Outline" type="StaticBody2D" parent="."]
+script = ExtResource("3_mx7ip")
+radius = 1000.0
+segments = 64

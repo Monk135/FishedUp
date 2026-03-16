@@ -5,42 +5,56 @@
 [node name="PerkSelection" type="Node2D"]
 script = ExtResource("1_oed67")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 445.0
-offset_top = 287.0
-offset_right = 670.0
-offset_bottom = 310.0
-text = "Perk Selection - Coming Soon"
-
 [node name="ScoreLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Card0" type="PanelContainer" parent="."]
-offset_left = 273.0
-offset_top = 207.0
-offset_right = 313.0
-offset_bottom = 247.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 318.0
+offset_top = 210.0
+offset_right = 358.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Perk" type="Label" parent="Card0"]
 layout_mode = 2
 text = "Perk"
 
 [node name="Card1" type="PanelContainer" parent="."]
-offset_left = 575.0
-offset_top = 208.0
-offset_right = 615.0
-offset_bottom = 248.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 584.0
+offset_top = 209.0
+offset_right = 624.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Perk" type="Label" parent="Card1"]
 layout_mode = 2
 text = "Perk"
 
 [node name="Card2" type="PanelContainer" parent="."]
-offset_left = 852.0
-offset_top = 207.0
-offset_right = 892.0
-offset_bottom = 247.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 882.0
+offset_top = 212.0
+offset_right = 922.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Perk" type="Label" parent="Card2"]
 layout_mode = 2

@@ -103,6 +103,7 @@ func _ready() -> void:
 	add_to_group("fish")
 	
 	bill_area.area_entered.connect(_on_bill_area_entered)
+
 	
 	health_bar.max_value = max_health
 	health_bar.value = health
@@ -114,6 +115,8 @@ func _ready() -> void:
 	original_modulate = modulate
 
 func _on_bill_area_entered(area: Area2D) -> void:
+	print("bill entered: ", area.get_groups())
+	
 	if area.is_in_group("hittable"):
 		var other_fish: Node = area.get_parent()
 		if other_fish == self:
@@ -132,6 +135,9 @@ func _on_bill_area_entered(area: Area2D) -> void:
 		var push_dir: Vector2 = (global_position - other_fish.global_position).normalized()
 		velocity += push_dir * knockback_force
 		other_fish.velocity += -push_dir * knockback_force
+		
+		
+		
 
 func die() -> void:
 	if last_hit_by != -99:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://psofqx5uxyal"]
 
-[ext_resource type="PackedScene" uid="uid://lhduebmhcfbn" path="res://scenes/Menus_&_UI/perk_card.tscn" id="1_fj5ya"]
+[ext_resource type="PackedScene" uid="uid://lhduebmhcfbn" path="res://scenes/Menus_&_UI/Perks_Scenes/perk_card.tscn" id="1_fj5ya"]
 [ext_resource type="Script" uid="uid://bspq65u1yw04q" path="res://scripts/Perks/perk_health_increase.gd" id="2_fj5ya"]
 
 [node name="PerkCard" instance=ExtResource("1_fj5ya")]

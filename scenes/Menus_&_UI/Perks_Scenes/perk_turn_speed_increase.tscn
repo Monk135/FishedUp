@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dev1yp3jcohf5"]
+
+[ext_resource type="PackedScene" uid="uid://lhduebmhcfbn" path="res://scenes/Menus_&_UI/Perks_Scenes/perk_card.tscn" id="1_k5g6k"]
+[ext_resource type="Script" uid="uid://psotkyevbfxy" path="res://scripts/Perks/perk_turn_speed_increase.gd" id="2_k5g6k"]
+
+[node name="PerkCard" instance=ExtResource("1_k5g6k")]
+script = ExtResource("2_k5g6k")

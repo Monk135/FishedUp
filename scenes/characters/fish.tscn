@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b184xgi2m7edi"]
+[gd_scene load_steps=6 format=3 uid="uid://b184xgi2m7edi"]
 
 [ext_resource type="Script" uid="uid://bei6o8170iu4o" path="res://scripts/fish_player.gd" id="1_0akro"]
 
@@ -14,26 +14,36 @@ size = Vector2(47, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_juify"]
 size = Vector2(54, 20)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_07rn3"]
-radius = 16.0
-height = 68.0
-
 [node name="Fish" type="CharacterBody2D"]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0akro")
 passive_thrust = 1800.0
 
-[node name="BillArea" type="Area2D" parent="."]
+[node name="HurtArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BillArea"]
-position = Vector2(60.5, 0)
-scale = Vector2(1, 2.9200008)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(93, 0)
+scale = Vector2(0.2680623, 1.8672084)
 shape = SubResource("RectangleShape2D_0akro")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="BillArea"]
-position = Vector2(26, 0)
-scale = Vector2(0.18633734, 8.613843)
+[node name="DefenseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DefenseArea"]
+position = Vector2(27, 4.9999995)
+rotation = 1.0007919
+scale = Vector2(-0.15191741, 6.180922)
+shape = SubResource("RectangleShape2D_0akro")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DefenseArea"]
+position = Vector2(27, -5.9999986)
+rotation = 2.0943952
+scale = Vector2(-0.15191741, 6.180922)
+shape = SubResource("RectangleShape2D_0akro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseArea"]
+position = Vector2(58, 0)
+scale = Vector2(0.7243489, 2.2000017)
 shape = SubResource("RectangleShape2D_0akro")
 
 [node name="HeadArea" type="Area2D" parent="."]
@@ -55,7 +65,7 @@ position = Vector2(-108, 0)
 shape = SubResource("RectangleShape2D_juify")
 
 [node name="BillVisual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(19, 17, 29, 9, 41, 4, 57, 1, 104, 0, 57, -1, 41, -5, 29, -11, 19, -17)
+polygon = PackedVector2Array(19, 17, 29, 9, 41, 4, 57, 1, 104, 0, 79.74348, -0.516098, 57, -1, 41, -5, 29, -11, 19, -17)
 
 [node name="HeadVisual" type="Polygon2D" parent="."]
 position = Vector2(-1, 3)
@@ -74,10 +84,8 @@ offset_top = -66.0
 offset_right = 3.0
 offset_bottom = -39.0
 
-[node name="PhysicsShape" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 0)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_07rn3")
+[node name="PhysicsShape" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, 16, -20, -17, 18, -17, 40, -5, 56, -1, 97, 0, 56, 1, 40, 4, 19, 17)
 
 [node name="WallFeeler" type="RayCast2D" parent="."]
 target_position = Vector2(75, 0)

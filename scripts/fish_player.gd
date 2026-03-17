@@ -11,6 +11,8 @@ var last_hit_by: int = -99  # device_id of last attacker
 
 var segment_prev_positions: Array[Vector2] = []
 
+
+
 @export var damage_bonus: float = 0.0
 
 @export var is_preview: bool = false
@@ -38,10 +40,14 @@ var is_dashing: bool = false
 
 var _last_input: Vector2 = Vector2.ZERO
 
+
 @export var wall_side_strength: float = 0.01
 
-@onready var physics_shape: CollisionShape2D = $PhysicsShape
-@onready var bill_area: Area2D = $BillArea
+@export var bill_length_multiplier: float = 1.0
+
+@onready var physics_shape: CollisionPolygon2D = $PhysicsShape
+@onready var hurt_area: Area2D = $HurtArea
+@onready var defense_area: Area2D = $DefenseArea
 @onready var head_area: Area2D = $HeadArea
 @onready var body_area: Area2D = $BodyArea
 @onready var tail_area: Area2D = $TailArea
@@ -96,13 +102,15 @@ func _ready() -> void:
 	for i in 4:
 		segment_positions[i] = global_position + Vector2(-i * segment_distance, 0)
 		segment_prev_positions[i] = segment_positions[i]
-	bill_area.add_to_group("bill")
+	hurt_area.add_to_group("hurt")
+	defense_area.add_to_group("defense")
+	hurt_area.area_entered.connect(_on_hurt_area_entered)
+	defense_area.area_entered.connect(_on_defense_area_entered)
 	head_area.add_to_group("hittable")
 	body_area.add_to_group("hittable")
 	tail_area.add_to_group("hittable")
 	add_to_group("fish")
-	
-	bill_area.area_entered.connect(_on_bill_area_entered)
+
 
 	
 	health_bar.max_value = max_health
@@ -135,9 +143,6 @@ func _on_bill_area_entered(area: Area2D) -> void:
 		var push_dir: Vector2 = (global_position - other_fish.global_position).normalized()
 		velocity += push_dir * knockback_force
 		other_fish.velocity += -push_dir * knockback_force
-		
-		
-		
 
 func die() -> void:
 	if last_hit_by != -99:
@@ -316,6 +321,20 @@ func _handle_joypad_movement(input: Vector2, delta: float) -> void:
 	velocity = velocity.limit_length(max_speed)
 	velocity *= damping
 	move_and_slide()
+	if get_slide_collision_count() > 0:
+		var col := get_slide_collision(0)
+		var collider := col.get_collider()
+		var normal := col.get_normal()
+		var bill_touching := false
+		for body in hurt_area.get_overlapping_bodies():
+			if body == collider:
+				bill_touching = true
+				break
+		if bill_touching:
+			var impact := velocity.dot(-normal)
+			if impact > 50.0:  # minimum threshold to avoid tiny nudges
+				velocity += normal * impact * 1.5  # 1.5 = bounce multiplier
+		
 
 func _handle_movement(input: Vector2, delta: float) -> void:
 	
@@ -365,7 +384,48 @@ func _handle_movement(input: Vector2, delta: float) -> void:
 	
 
 	move_and_slide()
-		
+	if get_slide_collision_count() > 0:
+		var col := get_slide_collision(0)
+		var collider := col.get_collider()
+		var normal := col.get_normal()
+		var bill_touching := false
+		for body in hurt_area.get_overlapping_bodies():
+			if body == collider:
+				bill_touching = true
+				break
+		if bill_touching:
+			var impact := velocity.dot(-normal)
+			if impact > 50.0:  # minimum threshold to avoid tiny nudges
+				velocity += normal * impact * 1.5  # 1.5 = bounce multiplier
+
+func _on_hurt_area_entered(area: Area2D) -> void:
+	if area.is_in_group("hittable"):
+		var other_fish: Node = area.get_parent()
+		if other_fish == self:
+			return
+		var impact_speed := velocity.length()
+		var knockback_dir: Vector2 = (other_fish.global_position - global_position).normalized()
+		other_fish.velocity += knockback_dir * knockback_force
+		other_fish.take_hit(impact_speed, knockback_dir, joypad_id, damage_bonus)
+		velocity -= knockback_dir * knockback_force * 0.8
+	
+	elif area.is_in_group("defense") or area.is_in_group("hurt"):
+		var other_fish: Node = area.get_parent()
+		if other_fish == self:
+			return
+		var push_dir: Vector2 = (global_position - other_fish.global_position).normalized()
+		velocity += push_dir * knockback_force
+		other_fish.velocity += -push_dir * knockback_force
+
+func _on_defense_area_entered(area: Area2D) -> void:
+	if area.is_in_group("defense") or area.is_in_group("hurt"):
+		var other_fish: Node = area.get_parent()
+		if other_fish == self:
+			return
+		var push_dir: Vector2 = (global_position - other_fish.global_position).normalized()
+		velocity += push_dir * knockback_force
+		other_fish.velocity += -push_dir * knockback_force
+
 func _update_chain() -> void:
 	segment_positions[1] = global_position
 	segment_angles[1] = head_angle
@@ -374,22 +434,15 @@ func _update_chain() -> void:
 
 	# Body and tail: verlet integration + distance constraint
 	for i in range(2, 4):
-		# Inertia: continue in same direction as last frame
 		var inertia := segment_positions[i] - segment_prev_positions[i]
 		segment_prev_positions[i] = segment_positions[i]
-		segment_positions[i] += inertia * 0.5  # 0.8 = how much inertia carries over
+		segment_positions[i] += inertia * 0.5
 
-		# Distance constraint: pull back to correct distance from parent
 		var parent_pos := segment_positions[i - 1]
-		var parent_angle := segment_angles[i - 1]
-		var target := parent_pos - Vector2(cos(parent_angle), sin(parent_angle)) * segment_distance
-		var diff := segment_positions[i] - target
-		if diff.length() > segment_distance * 0.5:
-			segment_positions[i] = target + diff.normalized() * segment_distance * 0.5
+		var target := parent_pos - Vector2(cos(segment_angles[i-1]), sin(segment_angles[i-1])) * segment_distance
+		segment_positions[i] = segment_positions[i].lerp(target, segment_lag)
 
-		# Angle from actual position
-		var desired_angle := (parent_pos - segment_positions[i]).angle()
-		segment_angles[i] = lerp_angle(segment_angles[i], desired_angle, 0.3)
+		segment_angles[i] = lerp_angle(segment_angles[i], segment_angles[i - 1], 0.10)
 
 func _update_visuals() -> void:
 	bill_visual.global_position = segment_positions[0]
@@ -403,8 +456,10 @@ func _update_visuals() -> void:
 	body_visual.rotation = segment_angles[2]
 	tail_visual.rotation = segment_angles[3]
 
-	bill_area.global_position = segment_positions[0]
-	bill_area.rotation = segment_angles[0]
+	hurt_area.global_position = segment_positions[0]
+	hurt_area.rotation = segment_angles[0]
+	defense_area.global_position = segment_positions[0]
+	defense_area.rotation = segment_angles[0]
 	head_area.global_position = segment_positions[1]
 	head_area.rotation = segment_angles[1]
 	body_area.global_position = segment_positions[2]
@@ -413,4 +468,4 @@ func _update_visuals() -> void:
 	tail_area.rotation = segment_angles[3]
 	
 	physics_shape.global_position = segment_positions[1]
-	physics_shape.global_rotation = segment_angles[1] + PI / 2
+	physics_shape.global_rotation = segment_angles[1]

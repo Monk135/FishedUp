@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://bopdh7v1w0qui"]
+
+[ext_resource type="Script" uid="uid://bvr4cokslk1dr" path="res://scenes/gym_oli.gd" id="1_s5hkh"]
+[ext_resource type="PackedScene" uid="uid://lep4oymjldoj" path="res://scenes/Menus_&_UI/Cam_Dynamic.tscn" id="2_0xlym"]
+[ext_resource type="Script" uid="uid://b2khj3yg14xed" path="res://scripts/LevelTech/LevelOutlines/RoundLevelOutline.gd" id="3_ql607"]
+[ext_resource type="PackedScene" uid="uid://dvetekrb6cbh" path="res://scenes/terrain/CollCylinder/Coll_Cylindre_40_500.tscn" id="4_0xlym"]
+[ext_resource type="PackedScene" uid="uid://b3385s201jcpj" path="res://scenes/terrain/CollPillar/Coll_Pillar_R100.tscn" id="5_jju17"]
+[ext_resource type="PackedScene" uid="uid://bi7dwcxnsqshx" path="res://scenes/terrain/CollCylinder/Coll_Cylindre_20_200.tscn" id="6_ql607"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6npea"]
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_s5hkh")
+
+[node name="CamDynamic" parent="." instance=ExtResource("2_0xlym")]
+map_size = Vector2(3840, 2160)
+max_zoom = 1.0
+
+[node name="RootMap" type="Node2D" parent="."]
+position = Vector2(154, 84)
+scale = Vector2(3, 3)
+
+[node name="Bg" type="Sprite2D" parent="RootMap"]
+visible = false
+z_index = -1
+position = Vector2(140.33334, 80.333336)
+scale = Vector2(1280, 720)
+texture = SubResource("PlaceholderTexture2D_6npea")
+
+[node name="SpawnPoint0" type="Marker2D" parent="."]
+position = Vector2(-576.60333, -324.52277)
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(576.8036, -325.769)
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(-578.9696, 327.7845)
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(578.3894, 326.36115)
+
+[node name="Outline" type="StaticBody2D" parent="."]
+script = ExtResource("3_ql607")
+radius = 1000.0
+segments = 64
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Island" type="Node2D" parent="Map"]
+position = Vector2(-424.49713, -238.6062)
+rotation = -1.6972287
+
+[node name="CollCylindre" parent="Map/Island" instance=ExtResource("4_0xlym")]
+position = Vector2(58.039307, -150.03638)
+rotation = -0.9178563
+
+[node name="CollCylindre2" parent="Map/Island" instance=ExtResource("4_0xlym")]
+position = Vector2(-167.28278, -12.000916)
+rotation = -0.06807339
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollPillar" parent="Map/Island" instance=ExtResource("5_jju17")]
+position = Vector2(-124.23334, -216.58728)
+
+[node name="CollPillar2" parent="Map/Island" instance=ExtResource("5_jju17")]
+position = Vector2(-95.93793, 191.33777)
+
+[node name="CollPillar3" parent="Map/Island" instance=ExtResource("5_jju17")]
+position = Vector2(182.7287, 21.799316)
+
+[node name="CollCylindre3" parent="Map/Island" instance=ExtResource("6_ql607")]
+position = Vector2(5.1401367, 217.59485)
+rotation = 0.9402906
+
+[node name="CollCylindre4" parent="Map/Island" instance=ExtResource("6_ql607")]
+position = Vector2(143.56181, 116.56232)
+rotation = 0.9402906
+
+[node name="Island2" type="Node2D" parent="Map"]
+position = Vector2(425.33746, -225.65564)
+rotation = 2.6694674
+
+[node name="CollCylindre" parent="Map/Island2" instance=ExtResource("4_0xlym")]
+position = Vector2(58.039307, -150.03638)
+rotation = -0.9178563
+
+[node name="CollCylindre2" parent="Map/Island2" instance=ExtResource("4_0xlym")]
+position = Vector2(-167.28278, -12.000916)
+rotation = -0.06807339
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollPillar" parent="Map/Island2" instance=ExtResource("5_jju17")]
+position = Vector2(-124.23334, -216.58728)
+
+[node name="CollPillar2" parent="Map/Island2" instance=ExtResource("5_jju17")]
+position = Vector2(-95.93793, 191.33777)
+
+[node name="CollPillar3" parent="Map/Island2" instance=ExtResource("5_jju17")]
+position = Vector2(182.7287, 21.799316)
+
+[node name="CollCylindre3" parent="Map/Island2" instance=ExtResource("6_ql607")]
+position = Vector2(5.1401367, 217.59485)
+rotation = 0.9402906
+
+[node name="CollCylindre4" parent="Map/Island2" instance=ExtResource("6_ql607")]
+position = Vector2(143.56181, 116.56232)
+rotation = 0.9402906

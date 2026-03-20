@@ -1,0 +1,148 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgc54eoiitxvv"]
+
+[ext_resource type="PackedScene" uid="uid://cqbi2tbwy3y6x" path="res://scenes/Maps/Levels/LEVEL00_PARENT.tscn" id="1_n8y3g"]
+[ext_resource type="PackedScene" uid="uid://x2kit23i2csb" path="res://scenes/terrain/CollPillar/Coll_Pillar_R150.tscn" id="2_4l3py"]
+[ext_resource type="PackedScene" uid="uid://bids4h7faantw" path="res://scenes/terrain/CollCylinder/Coll_Cylindre_40_200.tscn" id="3_7cllv"]
+[ext_resource type="PackedScene" uid="uid://b3385s201jcpj" path="res://scenes/terrain/CollPillar/Coll_Pillar_R100.tscn" id="4_mjpk8"]
+[ext_resource type="PackedScene" uid="uid://dvetekrb6cbh" path="res://scenes/terrain/CollCylinder/Coll_Cylindre_40_500.tscn" id="5_4o6j7"]
+
+[node name="Arena" instance=ExtResource("1_n8y3g")]
+
+[node name="IslandType 1" type="Node2D" parent="RootMap" index="1"]
+position = Vector2(-146.46, -135.9986)
+
+[node name="CollPillar" parent="RootMap/IslandType 1" index="0" instance=ExtResource("2_4l3py")]
+position = Vector2(0.9629669, -1.7554016)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/IslandType 1" index="1" instance=ExtResource("3_7cllv")]
+position = Vector2(-20.400276, -41.82515)
+rotation = 0.39096302
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/IslandType 1" index="2" instance=ExtResource("3_7cllv")]
+position = Vector2(-4.621567, -82.30533)
+rotation = 0.3755793
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre3" parent="RootMap/IslandType 1" index="3" instance=ExtResource("3_7cllv")]
+position = Vector2(37.91358, -26.512955)
+rotation = 0.008352183
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre4" parent="RootMap/IslandType 1" index="4" instance=ExtResource("3_7cllv")]
+position = Vector2(40.16925, -75.3264)
+rotation = 0.08002643
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar3" parent="RootMap/IslandType 1" index="5" instance=ExtResource("4_mjpk8")]
+position = Vector2(22.093567, -98.57416)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre5" parent="RootMap/IslandType 1" index="6" instance=ExtResource("3_7cllv")]
+position = Vector2(10.54377, -50.30612)
+rotation = 0.23374385
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="IslandType 2" type="Node2D" parent="RootMap" index="2"]
+position = Vector2(33.286377, 80.8383)
+rotation = 2.7863598
+
+[node name="CollPillar" parent="RootMap/IslandType 2" index="0" instance=ExtResource("2_4l3py")]
+position = Vector2(0.7189102, -2.866455)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/IslandType 2" index="1" instance=ExtResource("3_7cllv")]
+position = Vector2(-20.64431, -42.936172)
+rotation = 0.39096302
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/IslandType 2" index="2" instance=ExtResource("3_7cllv")]
+position = Vector2(-4.865608, -83.41635)
+rotation = 0.3755793
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre3" parent="RootMap/IslandType 2" index="3" instance=ExtResource("3_7cllv")]
+position = Vector2(37.66954, -27.623993)
+rotation = 0.008352183
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre4" parent="RootMap/IslandType 2" index="4" instance=ExtResource("3_7cllv")]
+position = Vector2(39.92521, -76.43742)
+rotation = 0.08002643
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar3" parent="RootMap/IslandType 2" index="5" instance=ExtResource("4_mjpk8")]
+position = Vector2(21.84951, -99.68521)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre5" parent="RootMap/IslandType 2" index="6" instance=ExtResource("3_7cllv")]
+position = Vector2(10.299721, -51.417145)
+rotation = 0.23374385
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Node2D" type="Node2D" parent="RootMap" index="3"]
+position = Vector2(-105.06415, -41.772537)
+rotation = -0.41108593
+
+[node name="CollPillar" parent="RootMap/Node2D" index="0" instance=ExtResource("2_4l3py")]
+position = Vector2(-191.16693, 189.1275)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar2" parent="RootMap/Node2D" index="1" instance=ExtResource("2_4l3py")]
+position = Vector2(-257.61816, 198.41638)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar3" parent="RootMap/Node2D" index="2" instance=ExtResource("2_4l3py")]
+position = Vector2(-198.3122, 274.15656)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/Node2D" index="3" instance=ExtResource("5_4o6j7")]
+position = Vector2(-153.93823, 266.73666)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/Node2D" index="4" instance=ExtResource("5_4o6j7")]
+position = Vector2(-255.09424, 147.42448)
+rotation = 1.655787
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Node2D2" type="Node2D" parent="RootMap" index="4"]
+position = Vector2(-53.16499, -56.962517)
+rotation = 2.9945223
+
+[node name="CollPillar" parent="RootMap/Node2D2" index="0" instance=ExtResource("2_4l3py")]
+position = Vector2(-191.16693, 189.1275)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar2" parent="RootMap/Node2D2" index="1" instance=ExtResource("2_4l3py")]
+position = Vector2(-257.61816, 198.41638)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar3" parent="RootMap/Node2D2" index="2" instance=ExtResource("2_4l3py")]
+position = Vector2(-198.3122, 274.15656)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/Node2D2" index="3" instance=ExtResource("5_4o6j7")]
+position = Vector2(-153.93823, 266.73666)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/Node2D2" index="4" instance=ExtResource("5_4o6j7")]
+position = Vector2(-255.09424, 147.42448)
+rotation = 1.655787
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar" parent="RootMap" index="5" instance=ExtResource("4_mjpk8")]
+position = Vector2(142.7091, -26.511597)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar2" parent="RootMap" index="6" instance=ExtResource("4_mjpk8")]
+position = Vector2(-242.10419, -26.511597)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar3" parent="RootMap" index="7" instance=ExtResource("4_mjpk8")]
+position = Vector2(17.391602, -146.76575)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollPillar4" parent="RootMap" index="8" instance=ExtResource("4_mjpk8")]
+position = Vector2(-116.786705, 92.476685)
+scale = Vector2(0.33333334, 0.33333334)

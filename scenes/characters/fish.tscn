@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b184xgi2m7edi"]
+[gd_scene load_steps=7 format=3 uid="uid://b184xgi2m7edi"]
 
 [ext_resource type="Script" uid="uid://bei6o8170iu4o" path="res://scripts/fish_player.gd" id="1_0akro"]
 
@@ -14,11 +14,15 @@ size = Vector2(47, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_juify"]
 size = Vector2(54, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07rn3"]
+size = Vector2(56, 54)
+
 [node name="Fish" type="CharacterBody2D"]
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_0akro")
 passive_thrust = 1800.0
+initial_damage = 100.0
 
 [node name="HurtArea" type="Area2D" parent="."]
 
@@ -95,3 +99,14 @@ target_position = Vector2(150, 0)
 
 [node name="WallFeelerRight" type="RayCast2D" parent="."]
 target_position = Vector2(150, 0)
+
+[node name="ArmorVisual" type="Polygon2D" parent="." groups=["keep_color"]]
+scale = Vector2(1, 1.2512664)
+color = Color(0.6988297, 0.6913024, 0.6708611, 1)
+polygon = PackedVector2Array(-77, -16, -77, -22, -21, -22, -21, -16, -45, -16, -45, 16, -21, 16, -21, 22, -77, 22, -77, 16, -52, 16, -52, -16)
+
+[node name="ArmorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmorArea"]
+position = Vector2(-49, 0)
+shape = SubResource("RectangleShape2D_07rn3")

@@ -40,18 +40,17 @@ func _spawn_players() -> void:
 		fish.global_position = spawn.global_position
 		fish.set("joypad_id", device_id)
 		for child in fish.get_children():
-			if child is Polygon2D:
+			if child is Polygon2D and not child.is_in_group("keep_color"):
 				child.color = color
 		add_child(fish)
 		fish_count += 1
 		
 		if PlayerData.pending_perks.has(device_id):
-			var perk_path: String = PlayerData.pending_perks[device_id]
-			print("applying perk from path: ", perk_path)
-			var perk_scene: PackedScene = load(perk_path)
-			var perk: Node = perk_scene.instantiate()
-			perk.apply(fish)
-			perk.queue_free()
+			for perk_path in PlayerData.pending_perks[device_id]:
+				var perk_scene: PackedScene = load(perk_path)
+				var perk: Node = perk_scene.instantiate()
+				perk.apply(fish)
+				perk.queue_free()
 			
 		print("pending perks: ", PlayerData.pending_perks)
 		

@@ -5,3 +5,6 @@
 
 [node name="PerkCard" instance=ExtResource("1_k5g6k")]
 script = ExtResource("2_k5g6k")
+
+[node name="VBoxContainer" parent="." index="0"]
+clip_contents = true

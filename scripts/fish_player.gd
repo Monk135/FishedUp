@@ -51,6 +51,8 @@ var _last_input: Vector2 = Vector2.ZERO
 @onready var head_area: Area2D = $HeadArea
 @onready var body_area: Area2D = $BodyArea
 @onready var tail_area: Area2D = $TailArea
+@onready var armor_visual: Polygon2D = $ArmorVisual
+@onready var armor_area: Area2D = $ArmorArea
 
 @export var angular_damping: float = 0.99
 @export var max_rotation_speed: float = 1.0  # degrees per second
@@ -89,6 +91,8 @@ var _first_wall_hit: String = ""
 var idle_wave_timer: float = 0.0
 var idle_wave_direction: float = 1.0
 
+var has_side_armor: bool = false
+
 var _dash_was_on_cooldown: bool = false
 var _outline_flash_timer: float = 0.0
 @export var dash_ready_flash_duration: float = 0.05
@@ -110,6 +114,11 @@ func _ready() -> void:
 	body_area.add_to_group("hittable")
 	tail_area.add_to_group("hittable")
 	add_to_group("fish")
+	armor_area.add_to_group("armor")
+	armor_area.area_entered.connect(_on_armor_area_entered)
+	armor_area.monitoring = false
+	armor_area.monitorable = false
+	armor_visual.visible = false
 
 
 	
@@ -399,6 +408,8 @@ func _handle_movement(input: Vector2, delta: float) -> void:
 				velocity += normal * impact * 1.5  # 1.5 = bounce multiplier
 
 func _on_hurt_area_entered(area: Area2D) -> void:
+	if area.is_in_group("armor"):
+		return  # armor handles its own collision
 	if area.is_in_group("hittable"):
 		var other_fish: Node = area.get_parent()
 		if other_fish == self:
@@ -425,6 +436,29 @@ func _on_defense_area_entered(area: Area2D) -> void:
 		var push_dir: Vector2 = (global_position - other_fish.global_position).normalized()
 		velocity += push_dir * knockback_force
 		other_fish.velocity += -push_dir * knockback_force
+
+
+
+	if area.is_in_group("defense") or area.is_in_group("hurt"):
+		var other_fish: Node = area.get_parent()
+		if other_fish == self:
+			return
+		var push_dir: Vector2 = (global_position - other_fish.global_position).normalized()
+		velocity += push_dir * knockback_force
+		other_fish.velocity += -push_dir * knockback_force
+
+func _on_armor_area_entered(area: Area2D) -> void:
+	if not has_side_armor:
+		return
+	if area.is_in_group("hurt"):
+		var other_fish: Node = area.get_parent()
+		if other_fish == self:
+			return
+		# Push attacker back
+		var push_dir: Vector2 = (other_fish.global_position - global_position).normalized()
+		other_fish.velocity += push_dir * knockback_force
+		# Small push on armored fish too
+		velocity -= push_dir * knockback_force * 2
 
 func _update_chain() -> void:
 	segment_positions[1] = global_position
@@ -469,3 +503,8 @@ func _update_visuals() -> void:
 	
 	physics_shape.global_position = segment_positions[1]
 	physics_shape.global_rotation = segment_angles[1]
+	
+	armor_visual.global_position = segment_positions[2]
+	armor_visual.rotation = segment_angles[2]
+	armor_area.global_position = segment_positions[2]
+	armor_area.rotation = segment_angles[2]

@@ -29,6 +29,10 @@ window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+keep_color="Group of nodes that don't change color to match the fish's customization"
+
 [input]
 
 ui_left={

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://crb5l2qewmpkc"]
+
+[ext_resource type="PackedScene" uid="uid://lhduebmhcfbn" path="res://scenes/Menus_&_UI/Perks_Scenes/perk_card.tscn" id="1_k3mf2"]
+[ext_resource type="Script" uid="uid://b1u1tfdtfn311" path="res://scripts/Perks/perk_side_armor.gd" id="2_k3mf2"]
+
+[node name="PerkCard" instance=ExtResource("1_k3mf2")]
+script = ExtResource("2_k3mf2")
+
+[node name="VBoxContainer" parent="." index="0"]
+clip_contents = true

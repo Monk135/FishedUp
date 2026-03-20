@@ -9,7 +9,7 @@ func _ready() -> void:
 func apply(fish: CharacterBody2D) -> void:
 	fish.bill_length_multiplier += 0.5
 	fish.get_node("BillVisual").scale.x *= 1.5
-	var col := fish.get_node("BillArea/CollisionShape2D")
+	var col := fish.get_node("HurtArea/CollisionShape2D")
 	col.shape = col.shape.duplicate()  # make unique copy
 	var shape := col.shape as RectangleShape2D
 	shape.size.x *= 2.25

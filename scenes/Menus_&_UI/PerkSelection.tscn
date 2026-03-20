@@ -10,52 +10,64 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Card0" type="PanelContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(200, 300)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 318.0
-offset_top = 210.0
-offset_right = 358.0
-offset_bottom = 250.0
+offset_left = 180.0
+offset_top = 82.0
+offset_right = 380.0
+offset_bottom = 382.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Perk" type="Label" parent="Card0"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = "Perk"
+autowrap_mode = 2
 
 [node name="Card1" type="PanelContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(200, 300)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 584.0
-offset_top = 209.0
-offset_right = 624.0
-offset_bottom = 249.0
+offset_left = 478.0
+offset_top = 84.0
+offset_right = 678.0
+offset_bottom = 384.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Perk" type="Label" parent="Card1"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = "Perk"
+autowrap_mode = 2
 
 [node name="Card2" type="PanelContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(200, 300)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 882.0
-offset_top = 212.0
-offset_right = 922.0
-offset_bottom = 252.0
+offset_left = 779.0
+offset_top = 85.0
+offset_right = 979.0
+offset_bottom = 385.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Perk" type="Label" parent="Card2"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = "Perk"
+autowrap_mode = 2

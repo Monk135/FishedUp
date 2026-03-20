@@ -79,13 +79,16 @@ func _select_card(device_id: int) -> void:
 	selected_cards[device_id] = hovered_card
 	var chosen_perk = current_perks[hovered_card]
 	print("scene_file_path: ", chosen_perk.scene_file_path)
-	PlayerData.pending_perks[device_id] = chosen_perk.perk_name
+	
+	if not PlayerData.pending_perks.has(device_id):
+		PlayerData.pending_perks[device_id] = []
+	PlayerData.pending_perks[device_id].append(chosen_perk.get_meta("perk_path"))
+	
 	print("player ", device_id, " selected: ", chosen_perk.perk_name)
 	current_player_index += 1
 	hovered_card = 1
-	PlayerData.pending_perks[device_id] = chosen_perk.get_meta("perk_path")
 	_highlight_card(hovered_card)
-	_deal_cards()  # new cards for next player
+	_deal_cards()
 	
 	if current_player_index >= selection_order.size():
 		_continue()

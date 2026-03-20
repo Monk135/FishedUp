@@ -7,6 +7,7 @@ const AVAILABLE_PERKS: Array = [
 	"res://scenes/Menus_&_UI/Perks_Scenes/perk_turn_speed_increase.tscn",
 	"res://scenes/Menus_&_UI/Perks_Scenes/perk_dash_cooldown_decrease.tscn",
 	"res://scenes/Menus_&_UI/Perks_Scenes/perk_bill_elongate.tscn",
+	"res://scenes/Menus_&_UI/Perks_Scenes/perk_side_armor.tscn",
 	# add more perk scenes here as you make them
 ]
 

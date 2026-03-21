@@ -1,5 +1,106 @@
-[gd_scene load_steps=2 format=3 uid="uid://cawniawxh7e54"]
+[gd_scene load_steps=5 format=3 uid="uid://cawniawxh7e54"]
 
 [ext_resource type="PackedScene" uid="uid://cqbi2tbwy3y6x" path="res://scenes/Maps/Levels/LEVEL00_PARENT.tscn" id="1_a3an6"]
+[ext_resource type="PackedScene" uid="uid://bnaoe6r4hu30x" path="res://scenes/terrain/CollPillar/Coll_Pillar_R200.tscn" id="2_sbvcd"]
+[ext_resource type="PackedScene" uid="uid://dvetekrb6cbh" path="res://scenes/terrain/CollCylinder/Coll_Cylindre_40_500.tscn" id="3_8dx7r"]
+[ext_resource type="PackedScene" uid="uid://b3385s201jcpj" path="res://scenes/terrain/CollPillar/Coll_Pillar_R100.tscn" id="4_86ykn"]
 
 [node name="Arena" instance=ExtResource("1_a3an6")]
+
+[node name="Node2D" type="Node2D" parent="RootMap" index="1"]
+position = Vector2(-52.30717, 278.65448)
+
+[node name="CollPillar" parent="RootMap/Node2D" index="0" instance=ExtResource("2_sbvcd")]
+position = Vector2(2.3779705, -32.05414)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/Node2D" index="1" instance=ExtResource("3_8dx7r")]
+position = Vector2(-72.9537, -41.910645)
+rotation = 0.95845914
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/Node2D" index="2" instance=ExtResource("3_8dx7r")]
+position = Vector2(-150.32986, -33.795227)
+rotation = 1.5629965
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre3" parent="RootMap/Node2D" index="3" instance=ExtResource("3_8dx7r")]
+position = Vector2(155.24348, -32.965515)
+rotation = 1.5644053
+scale = Vector2(0.3333333, 0.3333333)
+
+[node name="CollCylindre4" parent="RootMap/Node2D" index="4" instance=ExtResource("3_8dx7r")]
+position = Vector2(77.533714, -42.941193)
+rotation = 2.1856897
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Node2D3" type="Node2D" parent="RootMap" index="2"]
+position = Vector2(-202.7262, -308.52866)
+rotation = 2.745412
+
+[node name="CollPillar" parent="RootMap/Node2D3" index="0" instance=ExtResource("2_sbvcd")]
+position = Vector2(2.3779705, -32.05414)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/Node2D3" index="1" instance=ExtResource("3_8dx7r")]
+position = Vector2(-72.9537, -41.910645)
+rotation = 0.95845914
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/Node2D3" index="2" instance=ExtResource("3_8dx7r")]
+position = Vector2(-150.32986, -33.795227)
+rotation = 1.5629965
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre3" parent="RootMap/Node2D3" index="3" instance=ExtResource("3_8dx7r")]
+position = Vector2(155.24348, -32.965515)
+rotation = 1.5644053
+scale = Vector2(0.3333333, 0.3333333)
+
+[node name="CollCylindre4" parent="RootMap/Node2D3" index="4" instance=ExtResource("3_8dx7r")]
+position = Vector2(77.533714, -42.941193)
+rotation = 2.1856897
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Node2D4" type="Node2D" parent="RootMap" index="3"]
+position = Vector2(102.34719, -300.14868)
+rotation = -2.713244
+
+[node name="CollPillar" parent="RootMap/Node2D4" index="0" instance=ExtResource("2_sbvcd")]
+position = Vector2(2.3779705, -32.05414)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre" parent="RootMap/Node2D4" index="1" instance=ExtResource("3_8dx7r")]
+position = Vector2(-72.9537, -41.910645)
+rotation = 0.95845914
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre2" parent="RootMap/Node2D4" index="2" instance=ExtResource("3_8dx7r")]
+position = Vector2(-150.32986, -33.795227)
+rotation = 1.5629965
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollCylindre3" parent="RootMap/Node2D4" index="3" instance=ExtResource("3_8dx7r")]
+position = Vector2(155.24348, -32.965515)
+rotation = 1.5644053
+scale = Vector2(0.3333333, 0.3333333)
+
+[node name="CollCylindre4" parent="RootMap/Node2D4" index="4" instance=ExtResource("3_8dx7r")]
+position = Vector2(77.533714, -42.941193)
+rotation = 2.1856897
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="Node2D2" type="Node2D" parent="RootMap" index="4"]
+position = Vector2(-49.168705, -29.292032)
+
+[node name="CollPillar2" parent="." index="7" instance=ExtResource("4_86ykn")]
+position = Vector2(-619.9155, -2.026184)
+
+[node name="CollPillar3" parent="." index="8" instance=ExtResource("4_86ykn")]
+position = Vector2(598.7367, 4.878357)
+
+[node name="CollPillar4" parent="." index="9" instance=ExtResource("4_86ykn")]
+position = Vector2(0.9766846, 328.04248)
+
+[node name="CollPillar" parent="." index="10" instance=ExtResource("4_86ykn")]
+position = Vector2(-0.9802246, -321.87445)
